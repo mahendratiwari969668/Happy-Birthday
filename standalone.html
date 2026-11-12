@@ -1,0 +1,4128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#130c25">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Happy 18th Birthday Shreya! ✨ Fabulous 18 Celebration</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Main Stylesheet -->
+  <style>
+/* ==========================================================================
+   SHREYA'S 18TH BIRTHDAY - MOBILE-FIRST STYLESHEET
+   Aesthetic: Magical, Pastel & Neon Gradient, Glassmorphism, Playful & Vibrant
+   ========================================================================== */
+
+/* --- CSS Variables & Design Tokens --- */
+:root {
+  --bg-dark-primary: #0a0614;
+  --bg-dark-secondary: #140d27;
+  --bg-card: rgba(25, 16, 48, 0.65);
+  --bg-card-border: rgba(255, 255, 255, 0.12);
+  --bg-card-hover: rgba(40, 24, 75, 0.8);
+  
+  --neon-pink: #ff4d8d;
+  --neon-pink-glow: rgba(255, 77, 141, 0.45);
+  --pastel-pink: #f472b6;
+  --neon-purple: #c084fc;
+  --deep-purple: #8b5cf6;
+  --neon-gold: #fbbf24;
+  --warm-gold: #f59e0b;
+  --neon-cyan: #38bdf8;
+  
+  --text-main: #ffffff;
+  --text-muted: #d8b4fe;
+  --text-soft: #cbd5e1;
+  
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Fredoka', cursive, sans-serif;
+  --font-script: 'Caveat', cursive, sans-serif;
+  
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+  
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --shadow-glow: 0 0 25px rgba(255, 77, 141, 0.35);
+  --shadow-gold: 0 0 25px rgba(251, 191, 36, 0.35);
+  
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Base & Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--bg-dark-primary);
+  color: var(--text-main);
+  font-family: var(--font-body);
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  display: block;
+  overflow-x: clip;
+  background: var(--bg-dark-primary);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, #261245 0%, #130a26 45%, #080410 100%);
+}
+
+button, a, label, .wax-seal, .balloon, .candle, .dot {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Background Ambient Canvas */
+.ambient-stars-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+/* Mobile Frame Wrapper (Constrained to 430px for authentic mobile experience on desktop) */
+.mobile-device-container {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  background: rgba(14, 8, 28, 0.75);
+  box-shadow: 0 0 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(192, 132, 252, 0.12);
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom, 20px));
+  overflow-x: clip;
+}
+
+.mobile-device-container.is-locked {
+  display: none;
+}
+
+.mobile-device-container.is-unlocked {
+  animation: unlockRevealZoom 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes unlockRevealZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ==========================================================================
+   PRE-UNLOCK COUNTDOWN LOCK SCREEN
+   ========================================================================== */
+.pre-unlock-screen {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 28px 18px calc(28px + env(safe-area-inset-bottom, 16px));
+  position: relative;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: radial-gradient(circle at 50% 20%, rgba(168, 85, 247, 0.24), transparent 55%),
+              radial-gradient(circle at 80% 80%, rgba(244, 114, 182, 0.18), transparent 50%),
+              linear-gradient(160deg, rgba(16, 7, 36, 0.92), rgba(29, 10, 56, 0.88));
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-x: clip;
+}
+
+.pre-unlock-screen.is-unlocking {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+.pre-unlock-screen.is-dismissed {
+  display: none;
+}
+
+.lock-floating-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.lock-sparkle {
+  position: absolute;
+  font-size: 1.25rem;
+  opacity: 0.65;
+  filter: drop-shadow(0 0 10px rgba(244, 114, 182, 0.7));
+  animation: lockFloatParticle 6.5s ease-in-out infinite;
+}
+
+.lock-sparkle.s1 { top: 10%; left: 12%; animation-delay: 0s; }
+.lock-sparkle.s2 { top: 18%; right: 14%; animation-delay: 1.1s; }
+.lock-sparkle.s3 { top: 44%; left: 8%; animation-delay: 2.3s; }
+.lock-sparkle.s4 { top: 52%; right: 9%; animation-delay: 0.7s; }
+.lock-sparkle.s5 { bottom: 18%; left: 18%; animation-delay: 1.8s; }
+.lock-sparkle.s6 { bottom: 14%; right: 16%; animation-delay: 2.9s; }
+
+@keyframes lockFloatParticle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-14px) scale(1.15);
+    opacity: 0.95;
+  }
+}
+
+.lock-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 28px 20px;
+  border-radius: 26px;
+  background: rgba(25, 13, 52, 0.76);
+  border: 1px solid rgba(232, 121, 249, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55),
+              0 0 36px rgba(192, 132, 252, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.lock-card.is-shaking {
+  animation: lockCardShake 0.48s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes lockCardShake {
+  10%, 90% { transform: translateX(-3px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+
+.lock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f9d8ff;
+  background: rgba(192, 132, 252, 0.16);
+  border: 1px solid rgba(232, 121, 249, 0.45);
+  box-shadow: 0 0 18px rgba(192, 132, 252, 0.3);
+  animation: lockBadgePulse 2.4s ease-in-out infinite;
+}
+
+.lock-badge.is-ready {
+  color: #fef08a;
+  background: rgba(244, 114, 182, 0.22);
+  border-color: rgba(253, 224, 71, 0.65);
+  box-shadow: 0 0 24px rgba(244, 114, 182, 0.45);
+}
+
+@keyframes lockBadgePulse {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(192, 132, 252, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(244, 114, 182, 0.52);
+  }
+}
+
+.lock-eyebrow {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #f0abfc;
+  font-weight: 600;
+}
+
+.lock-title {
+  margin: 0;
+  font-family: var(--font-display, 'Playfair Display', Georgia, serif);
+  font-size: 2rem;
+  line-height: 1.15;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(244, 114, 182, 0.35);
+}
+
+.lock-title span {
+  background: linear-gradient(135deg, #fde047, #f472b6, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lock-subtitle {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(233, 213, 255, 0.86);
+  line-height: 1.45;
+}
+
+.lock-subtitle strong {
+  color: #fde047;
+  font-weight: 600;
+}
+
+.lock-countdown-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.lock-box {
+  padding: 12px 6px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.lock-num {
+  font-size: 1.55rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: #ffffff;
+  text-shadow: 0 0 14px rgba(244, 114, 182, 0.55);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+}
+
+.lock-num.tick-pop {
+  transform: scale(1.16);
+  color: #fde047;
+}
+
+.lock-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(233, 213, 255, 0.75);
+}
+
+.lock-action-btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 15px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lock-action-btn.is-waiting {
+  color: rgba(243, 232, 255, 0.78);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.lock-action-btn.is-waiting:active {
+  transform: scale(0.97);
+}
+
+.lock-action-btn.is-ready {
+  color: #1f0a34;
+  border-color: rgba(254, 240, 138, 0.9);
+  background: linear-gradient(135deg, #fde047, #f472b6 55%, #e879f9);
+  box-shadow: 0 0 28px rgba(244, 114, 182, 0.65), 0 10px 25px rgba(0, 0, 0, 0.4);
+  animation: unlockButtonGlow 1.7s ease-in-out infinite;
+}
+
+.lock-action-btn.is-ready:active {
+  transform: scale(0.96);
+}
+
+@keyframes unlockButtonGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 22px rgba(244, 114, 182, 0.55), 0 10px 24px rgba(0, 0, 0, 0.35);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 38px rgba(253, 224, 71, 0.8), 0 12px 30px rgba(244, 114, 182, 0.45);
+  }
+}
+
+.lock-hint {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: rgba(216, 180, 254, 0.72);
+  line-height: 1.4;
+}
+
+/* Top Sticky Navigation Bar */
+.top-nav-bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 4px;
+  padding-top: max(14px, env(safe-area-inset-top));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(10, 6, 20, 0.85) 0%, rgba(10, 6, 20, 0.3) 80%, transparent 100%);
+}
+
+.brand-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  color: #fce7f3;
+}
+
+.brand-pill .sparkle-icon {
+  font-size: 1rem;
+  animation: spinSlow 6s linear infinite;
+}
+
+.music-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(255, 77, 141, 0.25), rgba(192, 132, 252, 0.25));
+  border: 1px solid rgba(255, 117, 168, 0.4);
+  border-radius: var(--radius-full);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 77, 141, 0.25);
+  transition: var(--transition-smooth);
+}
+
+.music-pill-btn:active {
+  transform: scale(0.94);
+}
+
+.music-pill-btn.is-playing {
+  background: linear-gradient(135deg, #ff4d8d, #a855f7);
+  box-shadow: 0 0 20px rgba(255, 77, 141, 0.55);
+}
+
+.equalizer-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 12px;
+}
+
+.equalizer-bars span {
+  width: 2.5px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.music-pill-btn.is-playing .equalizer-bars span:nth-child(1) { animation: soundWave 0.8s ease-in-out infinite alternate; }
+.music-pill-btn.is-playing .equalizer-bars span:nth-child(2) { animation: soundWave 0.5s ease-in-out 0.2s infinite alternate; }
+.music-pill-btn.is-playing .equalizer-bars span:nth-child(3) { animation: soundWave 0.9s ease-in-out 0.1s infinite alternate; }
+.music-pill-btn.is-playing .equalizer-bars span:nth-child(4) { animation: soundWave 0.6s ease-in-out 0.3s infinite alternate; }
+
+/* Stream Container */
+.mobile-content-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Glassmorphism Generic Card */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  padding: 22px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+}
+
+/* Neon Gradient Text */
+.neon-gradient-text {
+  background: linear-gradient(135deg, #ff6b9d 0%, #f43f5e 50%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  text-shadow: 0 0 25px rgba(255, 107, 157, 0.3);
+}
+
+.shreya-name {
+  background: linear-gradient(135deg, #f472b6, #c084fc, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Section Header Styles */
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #e9d5ff;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  padding: 0 10px;
+}
+
+
+/* ==========================================================================
+   SECTION 1: HERO & ENVELOPE UNWRAPPING
+   ========================================================================== */
+.hero-section {
+  text-align: center;
+  position: relative;
+  padding: 24px 8px 10px;
+}
+
+.hero-glow-blob {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 77, 141, 0.3) 0%, rgba(192, 132, 252, 0.2) 40%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  color: #fed7aa;
+  margin-bottom: 16px;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #fbbf24;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fbbf24;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+  margin-bottom: 26px;
+  padding: 0 14px;
+}
+
+/* 3D Envelope System */
+.envelope-wrapper {
+  position: relative;
+  width: 290px;
+  height: 210px;
+  margin: 0 auto 20px;
+  perspective: 900px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #3d1b66, #200d3d);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(192, 132, 252, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.6s ease;
+}
+
+/* Triangular Flap */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 145px solid transparent;
+  border-right: 145px solid transparent;
+  border-top: 105px solid #4f2584;
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s 0.2s;
+  z-index: 5;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.envelope-pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 145px solid #2e1254;
+  border-right: 145px solid #250e44;
+  border-bottom: 110px solid #361661;
+  border-top: 100px solid transparent;
+  border-radius: 0 0 16px 16px;
+  z-index: 4;
+}
+
+/* Wax Seal */
+.wax-seal {
+  position: absolute;
+  top: 86px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  background: radial-gradient(circle, #fde047 15%, #eab308 60%, #a16207 100%);
+  border-radius: 50%;
+  z-index: 6;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 20px rgba(251, 191, 36, 0.6);
+  transition: var(--transition-spring);
+}
+
+.wax-seal-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed rgba(113, 63, 18, 0.6);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+
+.wax-number {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #713f12;
+  line-height: 1;
+}
+
+.wax-stars {
+  font-size: 0.6rem;
+  color: #713f12;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #fbbf24;
+  animation: pulseRingAnim 2s infinite;
+  pointer-events: none;
+}
+
+/* Letter inside */
+.envelope-letter {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  background: linear-gradient(135deg, #fffdf8, #fef3c7);
+  color: #1e1b4b;
+  border-radius: 12px;
+  padding: 16px 14px;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.letter-stamp {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.5rem;
+}
+
+.letter-to {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #831843;
+}
+
+.letter-body {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.letter-signature {
+  font-family: var(--font-script);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #be185d;
+  text-align: right;
+}
+
+.envelope-hint {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: #fed7aa;
+}
+
+.hand-indicator {
+  display: inline-block;
+  animation: bounceHand 1.5s infinite;
+}
+
+/* Opened State */
+.envelope-wrapper.is-opened .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-wrapper.is-opened .wax-seal {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.envelope-wrapper.is-opened .envelope-letter {
+  transform: translateY(-90px);
+  z-index: 10;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+}
+
+.envelope-wrapper.is-opened .envelope-hint {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.scroll-down-wrapper {
+  margin-top: 10px;
+}
+
+.scroll-down-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.scroll-down-pill:hover, .scroll-down-pill:active {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.down-arrow {
+  animation: bounceDown 1.8s infinite;
+}
+
+
+/* ==========================================================================
+   SECTION 2: MILESTONES & COUNTERS
+   ========================================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-icon-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.bg-pink-glow { background: rgba(255, 77, 141, 0.2); box-shadow: 0 0 15px rgba(255, 77, 141, 0.35); }
+.bg-purple-glow { background: rgba(192, 132, 252, 0.2); box-shadow: 0 0 15px rgba(192, 132, 252, 0.35); }
+.bg-gold-glow { background: rgba(251, 191, 36, 0.2); box-shadow: 0 0 15px rgba(251, 191, 36, 0.35); }
+.bg-cyan-glow { background: rgba(56, 189, 248, 0.2); box-shadow: 0 0 15px rgba(56, 189, 248, 0.35); }
+
+.stat-counter {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.stat-unit {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #f472b6;
+  letter-spacing: 0.6px;
+  margin-bottom: 2px;
+}
+
+.stat-desc {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  line-height: 1.3;
+}
+
+/* Live Seconds Ticker Card */
+.live-ticker-card {
+  background: linear-gradient(135deg, rgba(35, 17, 65, 0.75), rgba(65, 22, 90, 0.75));
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 16px;
+  text-align: center;
+}
+
+.ticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #fde047;
+  margin-bottom: 6px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  animation: blinkFast 1s infinite;
+}
+
+.ticker-label {
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  margin-bottom: 4px;
+}
+
+.ticker-numbers {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fef08a;
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.5);
+}
+
+
+/* ==========================================================================
+   SECTION 3: VIRTUAL CAKE & CANDLE BLOWING
+   ========================================================================== */
+.cake-stage {
+  padding: 24px 14px;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(180deg, rgba(30, 18, 56, 0.85) 0%, rgba(18, 9, 36, 0.95) 100%);
+  border: 1px solid rgba(255, 77, 141, 0.25);
+}
+
+.cake-container {
+  position: relative;
+  width: 250px;
+  margin: 40px auto 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Candles & Flames */
+.candles-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  position: relative;
+  z-index: 10;
+  margin-bottom: -6px;
+}
+
+.candle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Flame Animation */
+.flame-group {
+  position: relative;
+  width: 24px;
+  height: 38px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.flame-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.55) 0%, rgba(249, 115, 22, 0.2) 50%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: glowPulse 1.5s infinite alternate;
+}
+
+.flame {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 32px;
+  background: linear-gradient(to bottom, #fff7ed 0%, #fde047 30%, #ea580c 80%, #38bdf8 100%);
+  border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+  box-shadow: 0 0 15px #fde047, 0 0 25px #ea580c;
+  animation: flameWobble 1.2s infinite ease-in-out alternate;
+  transform-origin: bottom center;
+}
+
+.flame-inner {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 14px;
+  background: #ffffff;
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+/* Smoke Wisp (When blown) */
+.smoke {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 18px;
+  background: rgba(226, 232, 240, 0.6);
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.candle.is-blown .flame-group {
+  opacity: 0;
+  transform: scale(0.2) translateY(-10px);
+  pointer-events: none;
+}
+
+.candle.is-blown .smoke {
+  animation: smokeRise 2s ease-out forwards;
+}
+
+.wick {
+  width: 3px;
+  height: 9px;
+  background: #475569;
+  border-radius: 2px;
+  margin-top: -2px;
+}
+
+/* Number 1 and 8 Candle sticks */
+.candle-num-stick {
+  width: 34px;
+  height: 48px;
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  border: 2px solid #fdf2f8;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.candle-digit {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Cake Tiers */
+.cake-tier {
+  position: relative;
+  border-radius: 12px;
+  box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.2), 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.tier-top {
+  width: 140px;
+  height: 46px;
+  background: linear-gradient(180deg, #fce7f3 0%, #f472b6 100%);
+  z-index: 3;
+}
+
+.icing-drips {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.icing-drips span {
+  width: 14px;
+  height: 12px;
+  background: #fff;
+  border-radius: 0 0 10px 10px;
+}
+
+.cherries-row {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.15rem;
+  margin-top: 12px;
+}
+
+.tier-middle {
+  width: 190px;
+  height: 52px;
+  background: linear-gradient(180deg, #e9d5ff 0%, #c084fc 100%);
+  margin-top: -6px;
+  z-index: 2;
+  position: relative;
+  overflow: hidden;
+}
+
+.sprinkles-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(#fde047 2px, transparent 2px),
+    radial-gradient(#38bdf8 2px, transparent 2px),
+    radial-gradient(#ff4d8d 2px, transparent 2px);
+  background-size: 24px 24px;
+  background-position: 0 0, 8px 8px, 16px 16px;
+  opacity: 0.7;
+}
+
+.tier-bottom {
+  width: 230px;
+  height: 58px;
+  background: linear-gradient(180deg, #fbcfe8 0%, #db2777 100%);
+  margin-top: -6px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cake-ribbon {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  padding: 4px 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon-text {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #78350f;
+}
+
+.cake-plate {
+  width: 260px;
+  height: 14px;
+  background: linear-gradient(180deg, #e2e8f0 0%, #94a3b8 100%);
+  border-radius: 50%;
+  margin-top: -6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Blow Controls */
+.blow-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+  align-items: center;
+}
+
+.action-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition-spring);
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.glow-btn {
+  background: linear-gradient(135deg, #ff4d8d, #a855f7);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(255, 77, 141, 0.45);
+}
+
+.glow-btn:hover {
+  box-shadow: 0 6px 28px rgba(255, 77, 141, 0.65);
+}
+
+.mic-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-full);
+  color: #d8b4fe;
+  font-size: 0.78rem;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.mic-btn.active {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #fca5a5;
+  animation: pulseMic 1.2s infinite;
+}
+
+.blow-status-hint {
+  font-size: 0.8rem;
+  color: #fed7aa;
+  margin-top: 10px;
+  line-height: 1.35;
+}
+
+
+/* ==========================================================================
+   SECTION 4: POLAROID CAROUSEL / SWIPER
+   ========================================================================== */
+.polaroid-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0 16px;
+}
+
+.polaroid-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+  touch-action: pan-y;
+  will-change: transform;
+}
+
+.polaroid-card {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 12px;
+  position: relative;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.glass-polaroid {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 14px 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.2);
+  position: relative;
+  color: #1e293b;
+  transform: rotate(-1.5deg);
+  transition: transform 0.35s ease;
+}
+
+.polaroid-card:nth-child(even) .glass-polaroid {
+  transform: rotate(1.5deg);
+}
+
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 24px;
+  opacity: 0.85;
+  z-index: 5;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.tape-gold { background: rgba(251, 191, 36, 0.7); }
+.tape-pink { background: rgba(244, 114, 182, 0.7); }
+.tape-purple { background: rgba(192, 132, 252, 0.7); }
+.tape-cyan { background: rgba(56, 189, 248, 0.7); }
+
+.polaroid-img-frame {
+  position: relative;
+  width: 100%;
+  max-width: 290px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1e0b3b 0%, #581c87 50%, #9d174d 100%);
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Smart Blurred Glowing Backdrop (fills letterbox gaps for landscape/square photos) */
+.photo-blur-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(22px) brightness(0.65) saturate(1.3);
+  transform: scale(1.18);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.photo-blur-bg.is-active {
+  opacity: 1;
+}
+
+.photo-placeholder-ui {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  color: #fdf2f8;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.polaroid-img-frame.has-loaded-photo .photo-placeholder-ui {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.placeholder-cam {
+  font-size: 2.6rem;
+  margin-bottom: 8px;
+}
+
+.placeholder-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fde047;
+  margin-bottom: 4px;
+}
+
+.placeholder-sub {
+  font-size: 0.78rem;
+  color: #f5d0fe;
+  line-height: 1.35;
+}
+
+.polaroid-img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+  transition: opacity 0.3s ease;
+}
+
+/* Hide broken image icon when src is empty placeholder */
+.polaroid-img[src=""],
+.polaroid-img:not([src]) {
+  opacity: 0;
+}
+
+.polaroid-img.has-image {
+  opacity: 1;
+}
+
+.img-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 3;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.polaroid-caption {
+  margin-top: 14px;
+  padding: 0 6px;
+}
+
+.handwriting {
+  font-family: var(--font-script);
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: #0f172a;
+  min-height: 48px;
+}
+
+.caption-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.memory-tag {
+  color: #be185d;
+}
+
+.heart-react {
+  background: #fdf2f8;
+  color: #db2777;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* Carousel Nav Controls */
+.carousel-nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.carousel-arrow-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.carousel-arrow-btn:active {
+  transform: scale(0.9);
+  background: rgba(255, 77, 141, 0.4);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.dot.active {
+  width: 18px;
+  border-radius: 4px;
+  background: var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.carousel-counter-wrap {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.carousel-counter-pill {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #e9d5ff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+}
+
+
+/* ==========================================================================
+   SECTION 5: BALLOONS & WISH ACCORDION
+   ========================================================================== */
+.balloon-cluster {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 24px;
+  padding: 10px 4px;
+}
+
+.balloon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+  animation: balloonFloat 3.2s ease-in-out infinite alternate;
+}
+
+.balloon:nth-child(2) { animation-delay: 0.5s; }
+.balloon:nth-child(3) { animation-delay: 1s; }
+.balloon:nth-child(4) { animation-delay: 1.5s; }
+
+.balloon:active {
+  transform: scale(0.92);
+}
+
+.balloon-body {
+  width: 66px;
+  height: 80px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: inset 6px 6px 12px rgba(255, 255, 255, 0.4), 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.balloon-body::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  width: 8px;
+  height: 5px;
+  background: inherit;
+  border-radius: 2px;
+}
+
+.balloon-pink .balloon-body { background: linear-gradient(135deg, #ff758c, #ff4d8d); }
+.balloon-purple .balloon-body { background: linear-gradient(135deg, #d8b4fe, #a855f7); }
+.balloon-gold .balloon-body { background: linear-gradient(135deg, #fde047, #f59e0b); }
+.balloon-cyan .balloon-body { background: linear-gradient(135deg, #7dd3fc, #0ea5e9); }
+
+.balloon-emoji {
+  font-size: 1.3rem;
+}
+
+.balloon-title {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.balloon-string {
+  width: 2px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.35);
+  margin-top: 3px;
+  transition: all 0.35s ease;
+}
+
+/* Popped State (Stays popped permanently after opening once) */
+.balloon.is-popped {
+  animation: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+.balloon.is-popped .balloon-body {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 2px dashed rgba(255, 255, 255, 0.28);
+  box-shadow: none;
+  transform: scale(0.8) rotate(-8deg);
+  opacity: 0.55;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.balloon.is-popped .balloon-body::after {
+  display: none;
+}
+
+.balloon.is-popped .balloon-title {
+  color: #cbd5e1;
+  text-shadow: none;
+}
+
+.balloon.is-popped .balloon-string {
+  height: 22px;
+  opacity: 0.25;
+  transform: rotate(12deg);
+}
+
+/* Accordion Wish Cards */
+.wish-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accordion-item {
+  padding: 0;
+  border-radius: var(--radius-md);
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 16px 18px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  text-align: left;
+}
+
+.accordion-icon {
+  font-size: 1.25rem;
+}
+
+.accordion-title {
+  flex: 1;
+  font-weight: 600;
+}
+
+.accordion-chevron {
+  font-size: 1.1rem;
+  color: var(--neon-purple);
+  transition: transform 0.35s ease;
+}
+
+.accordion-item.is-open .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+  padding: 0 18px;
+}
+
+.accordion-item.is-open .accordion-content {
+  max-height: 250px;
+  padding-bottom: 18px;
+}
+
+.accordion-content p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.blessings-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.blessings-list li {
+  font-size: 0.85rem;
+  color: #f1f5f9;
+  line-height: 1.4;
+}
+
+
+/* ==========================================================================
+   SECTION 6: CLOSING WISHES & HEART SHOWER
+   ========================================================================== */
+.closing-card {
+  text-align: center;
+  padding: 30px 18px;
+  background: linear-gradient(180deg, rgba(38, 18, 70, 0.85) 0%, rgba(20, 10, 42, 0.95) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 0 0 35px rgba(192, 132, 252, 0.2);
+}
+
+.closing-crown {
+  font-size: 2.8rem;
+  margin-bottom: 8px;
+  animation: floatCrown 2.5s ease-in-out infinite alternate;
+}
+
+.closing-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.closing-text {
+  font-family: var(--font-script);
+  font-size: 1.55rem;
+  line-height: 1.35;
+  color: #fed7aa;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.closing-dedication {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f472b6;
+  margin-bottom: 24px;
+}
+
+/* Shower Love Button */
+.heart-shower-action {
+  margin-bottom: 24px;
+}
+
+.love-blast-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #ec4899, #f43f5e);
+  border: none;
+  border-radius: var(--radius-full);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(244, 63, 94, 0.5);
+  transition: var(--transition-spring);
+}
+
+.love-blast-btn:active {
+  transform: scale(0.92);
+}
+
+.love-counter {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+}
+
+.love-hint {
+  font-size: 0.75rem;
+  color: #fbcfe8;
+  margin-top: 8px;
+}
+
+/* Share actions */
+.share-actions-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.share-btn {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.whatsapp-btn {
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+}
+
+.whatsapp-btn:active {
+  transform: scale(0.95);
+}
+
+.copy-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Floating Confetti Shortcut Button */
+.floating-party-btn {
+  position: fixed;
+  bottom: 24px;
+  right: calc(50% - 195px);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24, #f43f5e);
+  border: 2px solid #fff;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 60;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5);
+  transition: var(--transition-spring);
+}
+
+@media (max-width: 430px) {
+  .floating-party-btn {
+    right: 20px;
+  }
+}
+
+.floating-party-btn:active {
+  transform: scale(0.85) rotate(20deg);
+}
+
+/* Floating Hearts Spawned on Tap */
+.flying-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  animation: floatUpAndFade 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Footer */
+.mobile-footer {
+  text-align: center;
+  padding: 10px 0 20px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.footer-sub {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+
+/* ==========================================================================
+   MODALS & POP-UPS
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 3, 16, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.modal-backdrop.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(180deg, #2a154a 0%, #170b2c 100%);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 77, 141, 0.3);
+  padding: 26px 20px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-sparkle-header .big-emoji {
+  font-size: 2.8rem;
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 10px 0 8px;
+}
+
+.modal-message {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+  margin-bottom: 18px;
+}
+
+.wish-fortune-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(251, 191, 36, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+.fortune-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fde047;
+  margin-bottom: 6px;
+}
+
+.fortune-text {
+  font-family: var(--font-script);
+  font-size: 1.25rem;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.balloon-pop-badge {
+  font-size: 3rem;
+  margin-bottom: 6px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* Toast Notice */
+.toast-notice {
+  position: fixed;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 110;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.toast-notice.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes soundWave {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+
+@keyframes pulseRingAnim {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes bounceHand {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@keyframes blinkFast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes flameWobble {
+  0% { transform: translateX(-50%) rotate(-2deg) scale(1); }
+  50% { transform: translateX(-50%) rotate(2deg) scale(1.05); }
+  100% { transform: translateX(-50%) rotate(-1.5deg) scale(0.96); }
+}
+
+@keyframes glowPulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.95; }
+}
+
+@keyframes smokeRise {
+  0% { opacity: 0.8; transform: translateX(-50%) scale(1) translateY(0); }
+  100% { opacity: 0; transform: translateX(-40%) scale(2.8) translateY(-45px); }
+}
+
+@keyframes pulseMic {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes balloonFloat {
+  0% { transform: translateY(0) rotate(-1deg); }
+  100% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes floatCrown {
+  0% { transform: translateY(0) rotate(-3deg); }
+  100% { transform: translateY(-8px) rotate(3deg); }
+}
+
+@keyframes floatUpAndFade {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-240px) scale(1.4) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+@keyframes animatePop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Ambient Animated Background Canvas -->
+  <canvas id="ambientStarsCanvas" class="ambient-stars-canvas"></canvas>
+
+  <!-- Pre-Unlock Countdown Lock Screen (Default Entry Until Nov 27, 2026 00:00:00 AM) -->
+  <section id="preUnlockScreen" class="pre-unlock-screen" aria-label="Birthday Countdown Lock Screen">
+    <div class="lock-floating-decor" aria-hidden="true">
+      <span class="lock-sparkle s1">✨</span>
+      <span class="lock-sparkle s2">💖</span>
+      <span class="lock-sparkle s3">👑</span>
+      <span class="lock-sparkle s4">✨</span>
+      <span class="lock-sparkle s5">🌸</span>
+      <span class="lock-sparkle s6">💫</span>
+    </div>
+
+    <div id="lockCard" class="lock-card">
+      <div id="lockStatusBadge" class="lock-badge">
+        <span class="lock-badge-icon">🔒</span>
+        <span>Unlocking the 18th Chapter...</span>
+      </div>
+
+      <p class="lock-eyebrow">A Royal Surprise For Shreya Tiwari</p>
+      <h1 class="lock-title">Shreya's 18th<br><span>Birthday Vault</span></h1>
+      <p class="lock-subtitle">Unlocks automatically on <strong>27th Nov 2026 • 12:00 AM</strong></p>
+
+      <div class="lock-countdown-grid" aria-live="polite">
+        <div class="lock-box">
+          <span id="lockDays" class="lock-num">00</span>
+          <span class="lock-label">Days</span>
+        </div>
+        <div class="lock-box">
+          <span id="lockHours" class="lock-num">00</span>
+          <span class="lock-label">Hours</span>
+        </div>
+        <div class="lock-box">
+          <span id="lockMins" class="lock-num">00</span>
+          <span class="lock-label">Mins</span>
+        </div>
+        <div class="lock-box">
+          <span id="lockSecs" class="lock-num">00</span>
+          <span class="lock-label">Secs</span>
+        </div>
+      </div>
+
+      <button id="lockActionBtn" class="lock-action-btn is-waiting" type="button">
+        ⏳ Surprise Awaiting...
+      </button>
+
+      <p class="lock-hint">Come back at midnight when the vault opens with memories, music &amp; wishes!</p>
+    </div>
+  </section>
+
+  <!-- Mobile Simulator Frame (Wrapper for Responsive Centering on Wide Screens) -->
+  <div id="mainDeviceContainer" class="mobile-device-container is-locked">
+    
+    <!-- Floating Audio Controller -->
+    <header class="top-nav-bar">
+      <div class="brand-pill">
+        <span class="sparkle-icon">✨</span>
+        <span class="brand-text">Shreya's 18th Birthday</span>
+      </div>
+      <button id="musicToggleBtn" class="music-pill-btn" aria-label="Toggle background music">
+        <span class="music-icon" id="musicIcon">🎵</span>
+        <span class="music-text" id="musicLabel">Play Music</span>
+        <div class="equalizer-bars" id="equalizerBars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </button>
+    </header>
+
+    <!-- Hidden HTML5 Audio Element pointing directly to local audio file -->
+    <audio id="bgMusicAudio" loop preload="auto" src="happy_bday.mpeg" playsinline></audio>
+
+    <main class="mobile-content-stream">
+
+      <!-- ============================================ -->
+      <!-- SECTION 1: HERO LANDING & ENVELOPE UNWRAPPING -->
+      <!-- ============================================ -->
+      <section class="hero-section" id="heroSection">
+        <div class="hero-glow-blob"></div>
+        
+        <div class="hero-badge animate-bounce-subtle">
+          <span class="badge-dot"></span>
+          <span>A Golden Milestone • 27th November</span>
+        </div>
+
+        <h1 class="hero-title">
+          Happy <span class="neon-gradient-text">18th</span><br>
+          Birthday, <span class="shreya-name">Shreya!</span>
+        </h1>
+        <p class="hero-subtitle">
+          To our shining star, welcome to adulthood & your Fabulous 18! A world of magic, joy, and grand dreams awaits you.
+        </p>
+
+        <!-- Interactive 3D Gift Envelope / Unwrap Box -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
+          <div class="envelope" id="envelopeCard">
+            <div class="envelope-flap" id="envelopeFlap"></div>
+            <div class="envelope-pocket"></div>
+            
+            <div class="wax-seal" id="waxSealBtn" role="button" tabindex="0" title="Tap to unseal!">
+              <div class="wax-seal-inner">
+                <span class="wax-number">18</span>
+                <span class="wax-stars">✦</span>
+              </div>
+              <div class="pulse-ring"></div>
+            </div>
+
+            <!-- Letter Inside Envelope -->
+            <div class="envelope-letter" id="envelopeLetter">
+              <div class="letter-stamp">🎂</div>
+              <p class="letter-to">Dearest Shreya,</p>
+              <p class="letter-body">
+                Today is all about celebrating the radiant, kind-hearted, and extraordinary young woman you have become. Welcome to 18! Tap to unwrap every surprise!
+              </p>
+              <div class="letter-signature">With infinite love ❤️</div>
+            </div>
+          </div>
+          <p class="envelope-hint" id="envelopeHint">
+            <span class="hand-indicator">👆</span> Tap the golden <strong>18</strong> seal to unwrap!
+          </p>
+        </div>
+
+        <!-- Quick Scroll Down Pill -->
+        <div class="scroll-down-wrapper">
+          <a href="#statsSection" class="scroll-down-pill">
+            <span>Explore The Magic</span>
+            <span class="down-arrow">↓</span>
+          </a>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 2: INTERACTIVE MILESTONES & STATS    -->
+      <!-- ============================================ -->
+      <section class="stats-section" id="statsSection">
+        <div class="section-header">
+          <span class="section-tag">Golden Milestones</span>
+          <h2 class="section-title">18 Years of Pure Joy ✨</h2>
+          <p class="section-subtitle">Since 27th November 2008, the world has been brighter with you in it.</p>
+        </div>
+
+        <div class="stats-grid">
+          <!-- Stat 1 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-pink-glow">💖</div>
+            <div class="stat-counter" id="countYears" data-target="18">0</div>
+            <div class="stat-unit">Years</div>
+            <p class="stat-desc">Of Pure Magic & Smiles</p>
+          </div>
+
+          <!-- Stat 2 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-purple-glow">🌙</div>
+            <div class="stat-counter" id="countMonths" data-target="216">0</div>
+            <div class="stat-unit">Months</div>
+            <p class="stat-desc">Of Inspiring Everyone</p>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-gold-glow">☀️</div>
+            <div class="stat-counter" id="countDays" data-target="6574">0</div>
+            <div class="stat-unit">Days</div>
+            <p class="stat-desc">Of Spreading Happiness</p>
+          </div>
+
+          <!-- Stat 4 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-cyan-glow">✨</div>
+            <div class="stat-counter" id="countHours" data-target="157776">0</div>
+            <div class="stat-unit">Hours</div>
+            <p class="stat-desc">Of Unconditional Love</p>
+          </div>
+        </div>
+
+        <!-- Real-Time Live Ticker Card -->
+        <div class="live-ticker-card glass-card">
+          <div class="ticker-badge">
+            <span class="live-dot"></span> LIVE TICKER
+          </div>
+          <div class="ticker-content">
+            <p class="ticker-label">Seconds of making our lives blessed:</p>
+            <div class="ticker-numbers" id="liveSecondsTicker">568,000,000+</div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 3: VIRTUAL CAKE & CANDLE BLOWING     -->
+      <!-- ============================================ -->
+      <section class="cake-section" id="cakeSection">
+        <div class="section-header">
+          <span class="section-tag">Interactive Ritual</span>
+          <h2 class="section-title">Make an 18th Wish! 🎂</h2>
+          <p class="section-subtitle">
+            Tap or blow gently into your mic to extinguish the candles and make your secret wish!
+          </p>
+        </div>
+
+        <div class="cake-stage glass-card">
+          <!-- Sparkles & Magic Dust -->
+          <div class="magic-dust" id="magicDust"></div>
+
+          <!-- Interactive Cake Graphic -->
+          <div class="cake-container" id="cakeContainer">
+            <!-- Candles Container -->
+            <div class="candles-wrapper">
+              
+              <!-- Candle 1 -->
+              <div class="candle candle-1" data-candle="1">
+                <div class="flame-group" id="flame1">
+                  <div class="flame-glow"></div>
+                  <div class="flame"></div>
+                  <div class="flame-inner"></div>
+                </div>
+                <div class="smoke" id="smoke1"></div>
+                <div class="wick"></div>
+                <div class="candle-stick candle-num-stick">
+                  <span class="candle-digit">1</span>
+                </div>
+              </div>
+
+              <!-- Candle 2 (Changed to 8) -->
+              <div class="candle candle-2" data-candle="2">
+                <div class="flame-group" id="flame2">
+                  <div class="flame-glow"></div>
+                  <div class="flame"></div>
+                  <div class="flame-inner"></div>
+                </div>
+                <div class="smoke" id="smoke2"></div>
+                <div class="wick"></div>
+                <div class="candle-stick candle-num-stick">
+                  <span class="candle-digit">8</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Cake Layers -->
+            <div class="cake-tier tier-top">
+              <div class="icing-drips">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="cherries-row">
+                <span>🍓</span><span>🍒</span><span>🍓</span><span>🍒</span>
+              </div>
+            </div>
+
+            <div class="cake-tier tier-middle">
+              <div class="frosting-layer"></div>
+              <div class="sprinkles-pattern"></div>
+            </div>
+
+            <div class="cake-tier tier-bottom">
+              <div class="cake-ribbon">
+                <span class="ribbon-text">FABULOUS 18 SHREYA</span>
+              </div>
+            </div>
+
+            <div class="cake-plate"></div>
+          </div>
+
+          <!-- Candle Blow Action Trigger / Microphone button -->
+          <div class="blow-controls">
+            <button id="blowCandlesBtn" class="action-btn glow-btn">
+              <span class="btn-icon">💨</span>
+              <span class="btn-text">Blow / Tap to Extinguish</span>
+            </button>
+            <button id="micBlowToggleBtn" class="mic-btn" title="Enable microphone to blow by breath!">
+              <span>🎙️ Use Mic to Blow (or tap above if mic is blocked)</span>
+            </button>
+          </div>
+          <p class="blow-status-hint" id="blowStatusHint">
+            ✨ Both candles are burning bright! Tap the button, swipe the flames, or use your mic!
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 4: POLAROID MEMORY CAROUSEL / SWIPER -->
+      <!-- ============================================ -->
+      <section class="gallery-section" id="gallerySection">
+        <div class="section-header">
+          <span class="section-tag">Cherished Memories</span>
+          <h2 class="section-title">The Shreya Gallery 📸</h2>
+          <p class="section-subtitle">Swipe through the unforgettable moments of laughter, adventures, and milestones.</p>
+        </div>
+
+        <!-- Carousel Container (10 Vertical 9:16 Photo Slots) -->
+        <div class="polaroid-carousel-wrapper">
+          <div class="polaroid-track" id="polaroidTrack">
+            
+            <!-- Photo Slot 1 -->
+            <div class="polaroid-card glass-polaroid active" data-index="0">
+              <div class="washi-tape tape-gold"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 1 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo1.jpg" 
+                     alt="Shreya Memory 1" 
+                     class="polaroid-img">
+                <div class="img-badge">Golden Bond ✨</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"From sweet little smiles to celebrating the big 18 together—some bonds just grow more magical with time."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#MagicalBonds</span>
+                  <span class="heart-react">💖 1 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 2 -->
+            <div class="polaroid-card glass-polaroid" data-index="1">
+              <div class="washi-tape tape-pink"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 2 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo2.jpg" 
+                     alt="Shreya Memory 2" 
+                     class="polaroid-img">
+                <div class="img-badge">Little Princess 👑</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Looking back at the cutest beginnings... little princess with a heart of gold!"</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#CuteBeginnings</span>
+                  <span class="heart-react">💛 2 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 3 -->
+            <div class="polaroid-card glass-polaroid" data-index="2">
+              <div class="washi-tape tape-purple"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 3 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo3.jpg" 
+                     alt="Shreya Memory 3" 
+                     class="polaroid-img">
+                <div class="img-badge">Royal Childhood 👸</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"The royal childhood throne! Crowned with innocence and endless naughtiness."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#ChildhoodThrone</span>
+                  <span class="heart-react">👑 3 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 4 -->
+            <div class="polaroid-card glass-polaroid" data-index="3">
+              <div class="washi-tape tape-cyan"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 4 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo4.jpg" 
+                     alt="Shreya Memory 4" 
+                     class="polaroid-img">
+                <div class="img-badge">Growing Together 🌱</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Growing up side by side, sharing silly jokes, muddy paths, and golden childhood memories."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#GoldenDays</span>
+                  <span class="heart-react">🌟 4 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 5 -->
+            <div class="polaroid-card glass-polaroid" data-index="4">
+              <div class="washi-tape tape-gold"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 5 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo5.jpg" 
+                     alt="Shreya Memory 5" 
+                     class="polaroid-img">
+                <div class="img-badge">Traditional Grace 🪷</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Stepping into traditional grace... shining brighter than a star on your special day."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#ShiningStar</span>
+                  <span class="heart-react">✨ 5 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 6 -->
+            <div class="polaroid-card glass-polaroid" data-index="5">
+              <div class="washi-tape tape-pink"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 6 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo6.jpg" 
+                     alt="Shreya Memory 6" 
+                     class="polaroid-img">
+                <div class="img-badge">Adventure Awaits 🚗</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Adventure awaits! Cruising through life with style, elegance, and dreams in your eyes."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#DreamBig</span>
+                  <span class="heart-react">💫 6 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 7 -->
+            <div class="polaroid-card glass-polaroid" data-index="6">
+              <div class="washi-tape tape-purple"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 7 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo7.jpg" 
+                     alt="Shreya Memory 7" 
+                     class="polaroid-img">
+                <div class="img-badge">Warmth &amp; Grace 🌸</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"A gentle smile that carries so much warmth, grace, and happiness for everyone around."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#GentleSmile</span>
+                  <span class="heart-react">🌸 7 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 8 -->
+            <div class="polaroid-card glass-polaroid" data-index="7">
+              <div class="washi-tape tape-cyan"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 8 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo8.jpg" 
+                     alt="Shreya Memory 8" 
+                     class="polaroid-img">
+                <div class="img-badge">Pure Joy ✨</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Wrapped in elegance and traditions, radiating pure joy in every single frame."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#PureJoy</span>
+                  <span class="heart-react">💐 8 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 9 -->
+            <div class="polaroid-card glass-polaroid" data-index="8">
+              <div class="washi-tape tape-gold"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 9 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo9.jpg" 
+                     alt="Shreya Memory 9" 
+                     class="polaroid-img">
+                <div class="img-badge">Sweet Candid 📸</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Caught in a sweet candid moment—stay just as vibrant and beautiful as you are!"</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#VibrantSoul</span>
+                  <span class="heart-react">🌼 9 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 10 -->
+            <div class="polaroid-card glass-polaroid" data-index="9">
+              <div class="washi-tape tape-pink"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 10 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo10.jpg" 
+                     alt="Shreya Memory 10" 
+                     class="polaroid-img">
+                <div class="img-badge">Fabulous 18 🎉</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Entering the 18th chapter of life with new dreams, confidence, and a gorgeous smile. Happy 18th Birthday!"</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#Happy18th</span>
+                  <span class="heart-react">🎂 10 / 10</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Carousel Controls -->
+          <div class="carousel-nav-bar">
+            <button id="carouselPrevBtn" class="carousel-arrow-btn" aria-label="Previous photo">‹</button>
+            <div class="carousel-dots" id="carouselDots">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+              <span class="dot" data-index="2"></span>
+              <span class="dot" data-index="3"></span>
+              <span class="dot" data-index="4"></span>
+              <span class="dot" data-index="5"></span>
+              <span class="dot" data-index="6"></span>
+              <span class="dot" data-index="7"></span>
+              <span class="dot" data-index="8"></span>
+              <span class="dot" data-index="9"></span>
+            </div>
+            <button id="carouselNextBtn" class="carousel-arrow-btn" aria-label="Next photo">›</button>
+          </div>
+          <div class="carousel-counter-wrap">
+            <span class="carousel-counter-pill" id="carouselCounterPill">Photo 1 / 10</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 5: INTERACTIVE BALLOONS & WISH NOTES -->
+      <!-- ============================================ -->
+      <section class="wishes-section" id="wishesSection">
+        <div class="section-header">
+          <span class="section-tag">Secret Messages</span>
+          <h2 class="section-title">Tap to Pop Wishes! 🎈</h2>
+          <p class="section-subtitle">Each floating balloon holds a sweet blessing written specially for you.</p>
+        </div>
+
+        <!-- Floating Balloons Cluster -->
+        <div class="balloon-cluster" id="balloonCluster">
+          
+          <div class="balloon balloon-pink" data-wish-id="1">
+            <div class="balloon-body">
+              <span class="balloon-emoji">🎁</span>
+              <span class="balloon-title">Family</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+          <div class="balloon balloon-purple" data-wish-id="2">
+            <div class="balloon-body">
+              <span class="balloon-emoji">🌟</span>
+              <span class="balloon-title">Dreams</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+          <div class="balloon balloon-gold" data-wish-id="3">
+            <div class="balloon-body">
+              <span class="balloon-emoji">👑</span>
+              <span class="balloon-title">Turned 18</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+          <div class="balloon balloon-cyan" data-wish-id="4">
+            <div class="balloon-body">
+              <span class="balloon-emoji">💖</span>
+              <span class="balloon-title">Future</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+        </div>
+
+        <!-- Accordion Message Cards -->
+        <div class="wish-cards-container">
+          
+          <div class="accordion-item glass-card">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-icon">💌</span>
+              <span class="accordion-title">From Your Proud Family</span>
+              <span class="accordion-chevron">▾</span>
+            </button>
+            <div class="accordion-content">
+              <p>
+                Watching you grow from a playful little toddler into such a confident, graceful, and intelligent young woman stepping into adulthood has been the greatest privilege of our lives. You will always be our pride and joy! Keep conquering hearts and goals with that dazzling smile.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item glass-card">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-icon">💫</span>
+              <span class="accordion-title">18 Blessings for Your Journey</span>
+              <span class="accordion-chevron">▾</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="blessings-list">
+                <li>✨ Unlimited joy, laughter, and grand adventures</li>
+                <li>📚 Academic & career triumphs, and boundless creativity</li>
+                <li>🌸 Loyal friends who always lift you higher</li>
+                <li>👑 Fearless courage to always be unapologetically YOU!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item glass-card">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-icon">🎀</span>
+              <span class="accordion-title">An 18th Milestone Promise</span>
+              <span class="accordion-chevron">▾</span>
+            </button>
+            <div class="accordion-content">
+              <p>
+                No matter how high you fly or where adulthood takes your wings, remember you always have a warm home and a family cheering for you at the top of our lungs! Happy 18th Birthday!
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 6: CLOSING WISHES & HEART SHOWER     -->
+      <!-- ============================================ -->
+      <section class="closing-section" id="closingSection">
+        <div class="closing-card glass-card">
+          <div class="closing-crown">👑</div>
+          <h2 class="closing-title">To The Brightest 18th Chapter!</h2>
+          <p class="closing-text">
+            "May your days be sprinkled with stardust, your heart be filled with music, and your adulthood be as extraordinary and beautiful as you are."
+          </p>
+          <div class="closing-dedication">
+            <span>With all our love, always & forever ❤️</span>
+          </div>
+
+          <!-- Send Love / Interactive Heart Shower Button -->
+          <div class="heart-shower-action">
+            <button id="sendLoveBtn" class="love-blast-btn" aria-label="Send flying hearts">
+              <span class="love-btn-emoji">💖</span>
+              <span class="love-btn-text">Shower Shreya With Love</span>
+              <span class="love-counter" id="loveCounterBadge">0</span>
+            </button>
+            <p class="love-hint">Tap rapidly to shower floating love! 💕</p>
+          </div>
+
+          <!-- Share Birthday Link Button -->
+          <div class="share-actions-row">
+            <button id="shareWhatsAppBtn" class="share-btn whatsapp-btn">
+              <span>📲 Share on WhatsApp</span>
+            </button>
+            <button id="copyLinkBtn" class="share-btn copy-btn">
+              <span>📋 Copy Link</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Note -->
+      <footer class="mobile-footer">
+        <p>Crafted with endless love for Shreya Tiwari's 18th Birthday ✨</p>
+        <p class="footer-sub">27th November • Welcome to Adulthood</p>
+      </footer>
+
+    </main>
+
+    <!-- Floating Confetti Trigger Button (Always reachable) -->
+    <button id="floatingPartyBtn" class="floating-party-btn" aria-label="Trigger confetti celebration">
+      🎉
+    </button>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MODAL 1: MAKE A WISH POP-UP (POST-CANDLE)    -->
+  <!-- ============================================ -->
+  <div class="modal-backdrop" id="wishModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card animate-pop">
+      <button class="modal-close-btn" id="closeWishModalBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-sparkle-header">
+        <span class="big-emoji">✨🎂✨</span>
+        <h3 class="modal-title">Wish Released to the Stars!</h3>
+      </div>
+      <p class="modal-message">
+        You blew out your 18 candles, Shreya! Your wish is on its way to the universe. May your 18th year and the exciting journey into adulthood bring you boundless happiness, success, and wonder!
+      </p>
+      <div class="wish-fortune-box">
+        <div class="fortune-badge">✨ 18th Birthday Blessing ✨</div>
+        <p class="fortune-text" id="fortuneText">
+          "The stars shine a little brighter today because it's the day you blessed our world 18 years ago."
+        </p>
+      </div>
+      <button class="action-btn glow-btn w-full" id="wishModalAckBtn">
+        <span>Claim My 18th Year! 💖</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MODAL 2: BALLOON POP SECRET MESSAGE          -->
+  <!-- ============================================ -->
+  <div class="modal-backdrop" id="balloonWishModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card animate-pop">
+      <button class="modal-close-btn" id="closeBalloonModalBtn" aria-label="Close modal">&times;</button>
+      <div class="balloon-pop-badge" id="balloonModalEmoji">🎈</div>
+      <h3 class="modal-title" id="balloonModalTitle">Secret Note For You</h3>
+      <p class="modal-message" id="balloonModalText">
+        You discovered a secret wish!
+      </p>
+      <button class="action-btn glow-btn w-full" id="closeBalloonAckBtn">
+        <span>Aww, Thank You! 💖</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Screen Toast Notification -->
+  <div id="toastNotification" class="toast-notice">Link copied to clipboard! 📋</div>
+
+  <!-- Main JavaScript File -->
+  <script>
+/**
+ * SHREYA'S 18TH BIRTHDAY - MOBILE-FIRST INTERACTIVE ENGINE
+ * Features:
+ * - Strict Single-Instance Play/Pause Music Controller (Custom Audio + Built-in Chime Fallback)
+ * - Mobile Scroll & Touch Guard (Zero Ghost Clicks / Accidental Taps While Scrolling)
+ * - Live Countdown Timer to 27th November + Real-Time Seconds Ticker
+ * - 3D Wax Seal Envelope Unwrapping ("18" Wax Seal)
+ * - Candle Blowing via Stationary Tap, Horizontal Swipe & Microphone Breath (Candles 1 & 8)
+ * - 6-Slot Touch-Optimized Polaroid Swiper Carousel & Local Photo Customizer
+ * - Multi-Cannon Confetti & Fireworks FX
+ * - Pop-able Secret Wish Balloons & Interactive Heart Shower
+ */
+
+(function () {
+  'use strict';
+
+  // ==========================================================================
+  // 1. CONFIGURATION & STATE
+  // ==========================================================================
+  const BIRTH_DATE = new Date(2008, 10, 27, 0, 0, 0); // November 27, 2008
+  const UNLOCK_TARGET_DATE = new Date(2026, 10, 27, 0, 0, 0); // November 27, 2026, 12:00:00 AM
+  let audioContext = null;
+  let isPlaying = false; // Strict single source of truth for music playback
+  let isSiteUnlocked = false;
+  let isReadyToUnlock = false;
+  let lockCountdownInterval = null;
+  let synthMusicInterval = null;
+  let synthMasterGain = null;
+  let activeOscillators = [];
+
+  let micStream = null;
+  let micAudioContext = null;
+  let micAnalyser = null;
+  let micInterval = null;
+  let isMicFallbackMode = false;
+
+  let loveCount = 0;
+  let currentCarouselIndex = 0;
+  let isEnvelopeOpened = false;
+  let candlesBlown = false;
+
+  // Mobile Touch & Scroll Guard State
+  let gestureStartX = 0;
+  let gestureStartY = 0;
+  let touchMovedDuringGesture = false;
+  let lastDragEndTime = 0;
+  let lastScrollTime = 0;
+  let lastTouchTime = 0;
+
+  // Secret wish notes for balloons (Personalized for 18th Birthday / Adulthood)
+  const BALLOON_NOTES = {
+    1: {
+      emoji: '🎁',
+      title: 'A Gift From The Heart',
+      text: 'Shreya, may your 18th year unlock door after door of laughter, grand triumphs, and unforgettable memories. We are all so profoundly proud of the phenomenal young woman you are today!'
+    },
+    2: {
+      emoji: '🌟',
+      title: 'Shooting For The Stars',
+      text: 'Never doubt the incredible power inside your soul. You have the intellect, empathy, and courage to achieve any dream in adulthood. Reach for the highest galaxy!'
+    },
+    3: {
+      emoji: '👑',
+      title: 'The Fabulous 18 Milestone',
+      text: 'Eighteen looks absolutely radiant on you! Welcome to official adulthood — keep smiling that infectious, whole-hearted smile that lights up every room you enter. Happy 18th Birthday!'
+    },
+    4: {
+      emoji: '💖',
+      title: 'Bright Future Ahead',
+      text: 'This milestone 18th chapter is the opening of your greatest adventure yet. May good health, genuine friendships, wisdom, and boundless success accompany you always.'
+    }
+  };
+
+  // ==========================================================================
+  // 2. DOM ELEMENT REFERENCES
+  // ==========================================================================
+  const preUnlockScreen = document.getElementById('preUnlockScreen');
+  const mainDeviceContainer = document.getElementById('mainDeviceContainer');
+  const lockCard = document.getElementById('lockCard');
+  const lockStatusBadge = document.getElementById('lockStatusBadge');
+  const lockDays = document.getElementById('lockDays');
+  const lockHours = document.getElementById('lockHours');
+  const lockMins = document.getElementById('lockMins');
+  const lockSecs = document.getElementById('lockSecs');
+  const lockActionBtn = document.getElementById('lockActionBtn');
+
+  const envelopeWrapper = document.getElementById('envelopeWrapper');
+  const waxSealBtn = document.getElementById('waxSealBtn');
+  const musicToggleBtn = document.getElementById('musicToggleBtn');
+  const musicIcon = document.getElementById('musicIcon');
+  const musicLabel = document.getElementById('musicLabel');
+  const bgMusicAudio = document.getElementById('bgMusicAudio');
+
+  const liveSecondsTicker = document.getElementById('liveSecondsTicker');
+
+  const blowCandlesBtn = document.getElementById('blowCandlesBtn');
+  const micBlowToggleBtn = document.getElementById('micBlowToggleBtn');
+  const blowStatusHint = document.getElementById('blowStatusHint');
+  const cakeContainer = document.getElementById('cakeContainer');
+  const candle1 = document.querySelector('.candle-1');
+  const candle2 = document.querySelector('.candle-2');
+
+  const polaroidTrack = document.getElementById('polaroidTrack');
+  const carouselDots = document.getElementById('carouselDots');
+  const carouselCounterPill = document.getElementById('carouselCounterPill');
+  const carouselPrevBtn = document.getElementById('carouselPrevBtn');
+  const carouselNextBtn = document.getElementById('carouselNextBtn');
+
+  const balloonCluster = document.getElementById('balloonCluster');
+  const sendLoveBtn = document.getElementById('sendLoveBtn');
+  const loveCounterBadge = document.getElementById('loveCounterBadge');
+  const floatingPartyBtn = document.getElementById('floatingPartyBtn');
+  const shareWhatsAppBtn = document.getElementById('shareWhatsAppBtn');
+  const copyLinkBtn = document.getElementById('copyLinkBtn');
+  const toastNotification = document.getElementById('toastNotification');
+
+  const wishModal = document.getElementById('wishModal');
+  const closeWishModalBtn = document.getElementById('closeWishModalBtn');
+  const wishModalAckBtn = document.getElementById('wishModalAckBtn');
+
+  const balloonWishModal = document.getElementById('balloonWishModal');
+  const closeBalloonModalBtn = document.getElementById('closeBalloonModalBtn');
+  const closeBalloonAckBtn = document.getElementById('closeBalloonAckBtn');
+  const balloonModalEmoji = document.getElementById('balloonModalEmoji');
+  const balloonModalTitle = document.getElementById('balloonModalTitle');
+  const balloonModalText = document.getElementById('balloonModalText');
+
+  // ==========================================================================
+  // 3. MOBILE SCROLL & GHOST-CLICK GUARD
+  // Prevents accidental button/card clicks when user scrolls or swipes vertically
+  // ==========================================================================
+  function setupGlobalTouchScrollGuard() {
+    document.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      gestureStartX = e.touches[0].clientX;
+      gestureStartY = e.touches[0].clientY;
+      touchMovedDuringGesture = false;
+      lastTouchTime = Date.now();
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      const dx = e.touches[0].clientX - gestureStartX;
+      const dy = e.touches[0].clientY - gestureStartY;
+      if (Math.hypot(dx, dy) > 10) {
+        touchMovedDuringGesture = true;
+      }
+      lastTouchTime = Date.now();
+    }, { passive: true });
+
+    document.addEventListener('touchend', () => {
+      lastTouchTime = Date.now();
+      if (touchMovedDuringGesture) {
+        lastDragEndTime = Date.now();
+      }
+      touchMovedDuringGesture = false;
+    }, { passive: true });
+
+    document.addEventListener('touchcancel', () => {
+      touchMovedDuringGesture = false;
+    }, { passive: true });
+
+    window.addEventListener('scroll', () => {
+      lastScrollTime = Date.now();
+    }, { passive: true });
+
+    // Capture-phase click filter: blocks stray ghost clicks after touch drags/scrolls
+    document.addEventListener('click', (e) => {
+      const now = Date.now();
+      const isRecentTouch = (now - lastTouchTime) < 1000;
+      const draggedRecently = touchMovedDuringGesture || (now - lastDragEndTime) < 350;
+      const scrolledDuringTouch = isRecentTouch && (now - lastScrollTime) < 200;
+
+      if (draggedRecently || scrolledDuringTouch) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  }
+
+  // ==========================================================================
+  // 4. UTILITIES & HAPTICS
+  // ==========================================================================
+  function triggerHaptic(pattern = [20, 40, 20]) {
+    if (navigator.vibrate) {
+      try { navigator.vibrate(pattern); } catch (e) { /* ignore */ }
+    }
+  }
+
+  function showToast(message) {
+    if (!toastNotification) return;
+    toastNotification.textContent = message;
+    toastNotification.classList.add('show');
+    setTimeout(() => {
+      toastNotification.classList.remove('show');
+    }, 2600);
+  }
+
+  // ==========================================================================
+  // 5. CONFETTI FX SYSTEM (With CDN & Autonomous Canvas Fallback)
+  // ==========================================================================
+  function fireConfettiBurst(x = 0.5, y = 0.6, particleCount = 70) {
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: particleCount,
+        spread: 70,
+        origin: { x: x, y: y },
+        colors: ['#ff4d8d', '#fbbf24', '#c084fc', '#38bdf8', '#ffffff'],
+        disableForReducedMotion: true
+      });
+    } else {
+      spawnMiniFallingParticles(particleCount);
+    }
+  }
+
+  function fireCelebrationFireworks() {
+    if (typeof confetti === 'function') {
+      const duration = 2.5 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 120 };
+
+      const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+        const particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.15, 0.35), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.65, 0.85), y: Math.random() - 0.2 } }));
+      }, 250);
+    } else {
+      spawnMiniFallingParticles(90);
+    }
+  }
+
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function spawnMiniFallingParticles(count = 50) {
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'flying-heart';
+      const symbols = ['✨', '🎉', '💖', '⭐', '🌸'];
+      particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      particle.style.left = `${Math.random() * 90 + 5}vw`;
+      particle.style.bottom = `${Math.random() * 40 + 20}vh`;
+      particle.style.fontSize = `${Math.random() * 18 + 14}px`;
+      particle.style.animationDuration = `${Math.random() * 1.5 + 1.2}s`;
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 2600);
+    }
+  }
+
+  // ==========================================================================
+  // 6. STRICT SINGLE-INSTANCE AUDIO & MUSIC BOX CONTROLLER
+  // Ensures zero overlapping/parallel playback when toggling Play/Pause
+  // ==========================================================================
+  function getAudioContext() {
+    if (!audioContext) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        audioContext = new AudioCtx();
+      }
+    }
+    if (audioContext && audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+    return audioContext;
+  }
+
+  function playOneShotTone(freq, startTime, duration = 0.45, type = 'sine') {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, startTime);
+      gain.gain.setValueAtTime(0.001, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.22, startTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    } catch (e) { /* ignore */ }
+  }
+
+  function playSynthNote(freq, startTime, duration = 0.45, type = 'sine') {
+    const ctx = getAudioContext();
+    if (!ctx || !synthMasterGain || !isPlaying) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      gain.gain.setValueAtTime(0.001, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.25, startTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+      osc.connect(gain);
+      gain.connect(synthMasterGain);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+
+      activeOscillators.push(osc);
+      osc.onended = () => {
+        activeOscillators = activeOscillators.filter(node => node !== osc);
+      };
+    } catch (e) { /* ignore */ }
+  }
+
+  function playSparkleSound() {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+    const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+    notes.forEach((freq, idx) => {
+      playOneShotTone(freq, now + idx * 0.08, 0.4, 'triangle');
+    });
+  }
+
+  function startMusicBoxSynth() {
+    stopMusicBoxSynth();
+    if (!isPlaying) return;
+
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    synthMasterGain = ctx.createGain();
+    synthMasterGain.gain.setValueAtTime(1.0, ctx.currentTime);
+    synthMasterGain.connect(ctx.destination);
+
+    const NOTE = {
+      C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+      G4: 392.00, A4: 440.00, B4: 493.88, C5: 523.25, D5: 587.33
+    };
+
+    const melody = [
+      { n: NOTE.G4, d: 0.3 }, { n: NOTE.G4, d: 0.3 }, { n: NOTE.A4, d: 0.6 }, { n: NOTE.G4, d: 0.6 }, { n: NOTE.C5, d: 0.6 }, { n: NOTE.B4, d: 1.0 },
+      { n: NOTE.G4, d: 0.3 }, { n: NOTE.G4, d: 0.3 }, { n: NOTE.A4, d: 0.6 }, { n: NOTE.G4, d: 0.6 }, { n: NOTE.D5, d: 0.6 }, { n: NOTE.C5, d: 1.0 },
+      { n: NOTE.G4, d: 0.3 }, { n: NOTE.G4, d: 0.3 }, { n: NOTE.G4 * 2, d: 0.6 }, { n: NOTE.E4 * 2, d: 0.6 }, { n: NOTE.C5, d: 0.6 }, { n: NOTE.B4, d: 0.6 }, { n: NOTE.A4, d: 0.8 },
+      { n: NOTE.F4 * 2, d: 0.3 }, { n: NOTE.F4 * 2, d: 0.3 }, { n: NOTE.E4 * 2, d: 0.6 }, { n: NOTE.C5, d: 0.6 }, { n: NOTE.D5, d: 0.6 }, { n: NOTE.C5, d: 1.2 }
+    ];
+
+    function scheduleTune() {
+      if (!isPlaying) return 0;
+      const now = ctx.currentTime;
+      let offset = 0.15;
+      melody.forEach(item => {
+        playSynthNote(item.n, now + offset, item.d, 'triangle');
+        playSynthNote(item.n * 2, now + offset, item.d * 0.4, 'sine');
+        offset += item.d + 0.12;
+      });
+      return offset * 1000;
+    }
+
+    const loopTime = scheduleTune();
+    synthMusicInterval = setInterval(() => {
+      if (isPlaying) {
+        scheduleTune();
+      } else {
+        stopMusicBoxSynth();
+      }
+    }, loopTime + 800);
+  }
+
+  function stopMusicBoxSynth() {
+    if (synthMusicInterval) {
+      clearInterval(synthMusicInterval);
+      synthMusicInterval = null;
+    }
+    // Immediately silence and stop all scheduled oscillators so zero notes linger
+    activeOscillators.forEach(osc => {
+      try {
+        osc.stop();
+        osc.disconnect();
+      } catch (e) { /* ignore */ }
+    });
+    activeOscillators = [];
+
+    if (synthMasterGain) {
+      try {
+        synthMasterGain.disconnect();
+      } catch (e) { /* ignore */ }
+      synthMasterGain = null;
+    }
+  }
+
+  function setAudioPlayingState(playing) {
+    isPlaying = playing;
+    if (!musicToggleBtn) return;
+    if (playing) {
+      musicToggleBtn.classList.add('is-playing');
+      if (musicIcon) musicIcon.textContent = '⏸️';
+      if (musicLabel) musicLabel.textContent = 'Pause Music';
+    } else {
+      musicToggleBtn.classList.remove('is-playing');
+      if (musicIcon) musicIcon.textContent = '🎵';
+      if (musicLabel) musicLabel.textContent = 'Play Music';
+    }
+  }
+
+  const DEFAULT_AUDIO_PATH = 'happy_bday.mpeg';
+
+  function startMusic() {
+    if (isPlaying) return; // Guard against duplicate starts
+    setAudioPlayingState(true);
+    stopMusicBoxSynth();
+
+    if (bgMusicAudio) {
+      const currentSrc = (bgMusicAudio.getAttribute('src') || '').trim();
+      if (currentSrc === '') {
+        bgMusicAudio.src = DEFAULT_AUDIO_PATH;
+      }
+
+      const playPromise = bgMusicAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // If user paused before the play() promise resolved, immediately pause
+          if (!isPlaying) {
+            bgMusicAudio.pause();
+          }
+        }).catch((err) => {
+          console.warn('[Birthday Audio] Could not play "happy_bday.mpeg":', err);
+          if (!isPlaying) return;
+
+          if (err && err.name === 'NotAllowedError') {
+            // Browser autoplay policy blocked playback without direct user gesture
+            setAudioPlayingState(false);
+            showToast('Tap "Play Music" to start the birthday song! 🎵');
+          } else {
+            // Codec unsupported or file unreachable -> graceful synth fallback
+            startMusicBoxSynth();
+          }
+        });
+      }
+    } else {
+      startMusicBoxSynth();
+    }
+  }
+
+  function stopMusic() {
+    setAudioPlayingState(false);
+    if (bgMusicAudio) {
+      bgMusicAudio.pause();
+    }
+    stopMusicBoxSynth();
+  }
+
+  function toggleMusic(e) {
+    if (e) e.stopPropagation();
+    if (isPlaying) {
+      stopMusic();
+    } else {
+      startMusic();
+    }
+  }
+
+  // ==========================================================================
+  // 7. ENVELOPE UNWRAPPING INTERACTION
+  // ==========================================================================
+  function unwrapEnvelope(e) {
+    if (e) e.stopPropagation();
+    if (isEnvelopeOpened) return;
+    isEnvelopeOpened = true;
+    triggerHaptic([30, 50, 40]);
+    playSparkleSound();
+
+    if (envelopeWrapper) {
+      envelopeWrapper.classList.add('is-opened');
+    }
+
+    if (typeof confetti === 'function') {
+      confetti({ particleCount: 60, spread: 60, origin: { x: 0.3, y: 0.55 } });
+      confetti({ particleCount: 60, spread: 60, origin: { x: 0.7, y: 0.55 } });
+    }
+
+    if (!isPlaying) {
+      startMusic();
+    }
+  }
+
+  // ==========================================================================
+  // 8. REAL-TIME MILESTONE TICKER & ANIMATED COUNTERS
+  // ==========================================================================
+  function updateLiveSeconds() {
+    if (!liveSecondsTicker) return;
+    const now = new Date();
+    const diffMs = now.getTime() - BIRTH_DATE.getTime();
+    const totalSeconds = Math.floor(diffMs / 1000);
+    liveSecondsTicker.textContent = totalSeconds.toLocaleString() + '+';
+  }
+
+  function animateCounters() {
+    const counterElements = document.querySelectorAll('.stat-counter');
+    counterElements.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const duration = 1800;
+      const startTime = performance.now();
+
+      function updateNumber(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - (1 - progress) * (1 - progress);
+        const currentVal = Math.floor(easeOut * target);
+        el.textContent = currentVal.toLocaleString();
+
+        if (progress < 1) {
+          requestAnimationFrame(updateNumber);
+        } else {
+          el.textContent = target.toLocaleString();
+        }
+      }
+      requestAnimationFrame(updateNumber);
+    });
+  }
+
+  function setupStatsObserver() {
+    const statsSection = document.getElementById('statsSection');
+    if (!statsSection) return;
+
+    let animated = false;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !animated) {
+          animated = true;
+          animateCounters();
+          fireConfettiBurst(0.5, 0.7, 45);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    observer.observe(statsSection);
+  }
+
+  // ==========================================================================
+  // 9. INTERACTIVE BIRTHDAY CAKE & CANDLE BLOWING
+  // ==========================================================================
+  function blowOutCandles() {
+    if (candlesBlown) return;
+    candlesBlown = true;
+    triggerHaptic([40, 80, 50, 100]);
+
+    if (candle1) candle1.classList.add('is-blown');
+    if (candle2) candle2.classList.add('is-blown');
+
+    const ctx = getAudioContext();
+    if (ctx) {
+      const now = ctx.currentTime;
+      playOneShotTone(180, now, 0.4, 'triangle');
+      playOneShotTone(523.25, now + 0.3, 0.5, 'sine');
+      playOneShotTone(659.25, now + 0.45, 0.5, 'sine');
+      playOneShotTone(783.99, now + 0.6, 0.7, 'sine');
+      playOneShotTone(1046.5, now + 0.75, 1.0, 'sine');
+    }
+
+    if (blowCandlesBtn) {
+      blowCandlesBtn.innerHTML = '<span>✨ Wish Made! ✨</span>';
+      blowCandlesBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    }
+
+    if (blowStatusHint) {
+      blowStatusHint.innerHTML = '🎉 <strong>Flames blown out!</strong> Your 18th birthday wish is on its way to the stars!';
+    }
+
+    stopMicListening();
+    if (micBlowToggleBtn) {
+      micBlowToggleBtn.style.display = 'none';
+    }
+    fireCelebrationFireworks();
+    setTimeout(() => {
+      openModal(wishModal);
+    }, 700);
+  }
+
+  function setupCandleTouchGestures() {
+    if (!cakeContainer) return;
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+
+    cakeContainer.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      swipeStartX = e.touches[0].clientX;
+      swipeStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    cakeContainer.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - swipeStartX;
+      const dy = e.changedTouches[0].clientY - swipeStartY;
+      // Only extinguish on an intentional horizontal swipe across the candles, never on vertical scrolling
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        blowOutCandles();
+      }
+    }, { passive: true });
+
+    if (candle1) candle1.addEventListener('click', blowOutCandles);
+    if (candle2) candle2.addEventListener('click', blowOutCandles);
+  }
+
+  function logMicSecurityWarning(reason) {
+    console.warn(
+      `[Birthday Cake Mic] ${reason}\n` +
+      'Note: Mobile browsers require a secure context (HTTPS or http://localhost) for navigator.mediaDevices.getUserMedia().\n' +
+      'When previewing over a local network IP (e.g., http://192.168.x.x), mic access is blocked by browser security policy.\n' +
+      'To test mic blowing on mobile, serve over HTTPS (e.g., ngrok, local-ssl-proxy, or deploy to HTTPS) or use http://localhost on desktop.\n' +
+      'Fallback active: Tap "Blow / Tap to Extinguish" or swipe horizontally across the flames!'
+    );
+  }
+
+  function enableMicFallbackMode(toastMessage, hintMessage) {
+    isMicFallbackMode = true;
+    stopMicListening(true);
+
+    if (micBlowToggleBtn) {
+      micBlowToggleBtn.classList.remove('active');
+      micBlowToggleBtn.innerHTML = '<span>💨 Mic unavailable — Tap here to blow!</span>';
+    }
+    if (blowStatusHint && !candlesBlown && hintMessage) {
+      blowStatusHint.innerHTML = hintMessage;
+    }
+    if (toastMessage) {
+      showToast(toastMessage);
+    }
+  }
+
+  function toggleMicListening() {
+    if (candlesBlown) return;
+
+    if (isMicFallbackMode) {
+      blowOutCandles();
+      return;
+    }
+
+    if (micStream) {
+      stopMicListening();
+    } else {
+      startMicListening();
+    }
+  }
+
+  async function startMicListening() {
+    if (candlesBlown) return;
+
+    try {
+      // Check for insecure HTTP origin (e.g., local network IP on mobile) or missing mediaDevices API
+      const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '[::1]';
+      if (!window.isSecureContext && !isLocalhost) {
+        logMicSecurityWarning('Insecure HTTP context detected (' + location.origin + ').');
+        enableMicFallbackMode(
+          'Mic requires HTTPS or localhost — tap to blow candles! 💨',
+          '🔒 <strong>Mic blocked on HTTP IP:</strong> Use HTTPS/localhost for mic, or simply tap <strong>"Blow / Tap to Extinguish"</strong>!'
+        );
+        return;
+      }
+
+      if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== 'function') {
+        logMicSecurityWarning('navigator.mediaDevices.getUserMedia is unavailable in this browser/context.');
+        enableMicFallbackMode(
+          'Mic unavailable here — tap to blow candles instead! 💨',
+          '✨ <strong>Mic not supported in this browser/origin:</strong> Tap <strong>"Blow / Tap to Extinguish"</strong> or swipe the flames!'
+        );
+        return;
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      micStream = stream;
+
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) {
+        throw new Error('Web Audio API AudioContext is not supported.');
+      }
+
+      micAudioContext = new AudioCtx();
+      if (micAudioContext.state === 'suspended') {
+        await micAudioContext.resume();
+      }
+
+      const source = micAudioContext.createMediaStreamSource(stream);
+      micAnalyser = micAudioContext.createAnalyser();
+      micAnalyser.fftSize = 256;
+      source.connect(micAnalyser);
+
+      if (micBlowToggleBtn) {
+        micBlowToggleBtn.classList.add('active');
+        micBlowToggleBtn.innerHTML = '<span>🎙️ Listening... Blow now! (Tap to stop)</span>';
+      }
+      showToast('Blow into your microphone! 💨');
+
+      const dataArray = new Uint8Array(micAnalyser.frequencyBinCount);
+      micInterval = setInterval(() => {
+        if (!micAnalyser) return;
+        micAnalyser.getByteFrequencyData(dataArray);
+        let sum = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+          sum += dataArray[i];
+        }
+        const average = sum / dataArray.length;
+        if (average > 55) {
+          blowOutCandles();
+        }
+      }, 100);
+    } catch (err) {
+      logMicSecurityWarning(`Microphone access failed (${err && err.name ? err.name : 'Error'}: ${err && err.message ? err.message : err}).`);
+      enableMicFallbackMode(
+        'Mic unavailable or denied — tap to blow candles instead! 💨',
+        '✨ <strong>Mic unavailable:</strong> Tap <strong>"Blow / Tap to Extinguish"</strong> or swipe horizontally across the candles!'
+      );
+    }
+  }
+
+  function stopMicListening(keepFallbackLabel = false) {
+    if (micInterval) {
+      clearInterval(micInterval);
+      micInterval = null;
+    }
+    if (micStream) {
+      micStream.getTracks().forEach(track => track.stop());
+      micStream = null;
+    }
+    if (micAudioContext) {
+      try { micAudioContext.close(); } catch (e) { /* ignore */ }
+      micAudioContext = null;
+    }
+    micAnalyser = null;
+    if (micBlowToggleBtn && !keepFallbackLabel) {
+      micBlowToggleBtn.classList.remove('active');
+      micBlowToggleBtn.innerHTML = '<span>🎙️ Use Mic to Blow (or tap above if mic is blocked)</span>';
+    }
+  }
+
+  // ==========================================================================
+  // 10. 10-SLOT 9:16 POLAROID TOUCH CAROUSEL & SMART BLUR BACKDROP
+  // ==========================================================================
+  function applyImageToFrame(img, srcUrl) {
+    if (!img) return;
+    const frame = img.closest('.polaroid-img-frame');
+    const blurBg = frame ? frame.querySelector('.photo-blur-bg') : null;
+
+    if (srcUrl && srcUrl.trim() !== '') {
+      img.classList.add('has-image');
+      if (frame) frame.classList.add('has-loaded-photo');
+      if (blurBg) {
+        blurBg.style.backgroundImage = `url("${srcUrl}")`;
+        blurBg.classList.add('is-active');
+      }
+    } else {
+      img.classList.remove('has-image');
+      if (frame) frame.classList.remove('has-loaded-photo');
+      if (blurBg) {
+        blurBg.style.backgroundImage = '';
+        blurBg.classList.remove('is-active');
+      }
+    }
+  }
+
+  function syncPhotoPlaceholderStates() {
+    const imgElements = document.querySelectorAll('.polaroid-img');
+    imgElements.forEach(img => {
+      const srcAttr = (img.getAttribute('src') || '').trim();
+      if (srcAttr === '') {
+        applyImageToFrame(img, '');
+        return;
+      }
+
+      const handleError = () => {
+        // Automatic fallback if a local file like photo10.jpg is actually saved as photo10.png
+        if (!img.dataset.pngFallbackTried && /\.jpe?g$/i.test(srcAttr)) {
+          img.dataset.pngFallbackTried = '1';
+          const pngFallback = srcAttr.replace(/\.jpe?g$/i, '.png');
+          img.addEventListener('load', () => applyImageToFrame(img, img.currentSrc || pngFallback), { once: true });
+          img.addEventListener('error', () => applyImageToFrame(img, ''), { once: true });
+          img.src = pngFallback;
+        } else {
+          applyImageToFrame(img, '');
+        }
+      };
+
+      if (img.complete) {
+        if (img.naturalWidth > 0) {
+          applyImageToFrame(img, img.currentSrc || srcAttr);
+        } else {
+          handleError();
+        }
+      } else {
+        img.addEventListener('load', () => applyImageToFrame(img, img.currentSrc || srcAttr), { once: true });
+        img.addEventListener('error', handleError, { once: true });
+      }
+    });
+  }
+
+  function updateCarousel(index) {
+    const cards = document.querySelectorAll('.polaroid-card');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    if (!cards.length) return;
+
+    if (index < 0) index = 0;
+    if (index >= cards.length) index = cards.length - 1;
+    currentCarouselIndex = index;
+
+    if (polaroidTrack) {
+      polaroidTrack.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentCarouselIndex);
+    });
+
+    if (carouselCounterPill) {
+      carouselCounterPill.textContent = `Photo ${currentCarouselIndex + 1} / ${cards.length}`;
+    }
+  }
+
+  function setupCarouselGestures() {
+    syncPhotoPlaceholderStates();
+
+    if (!polaroidTrack) return;
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    polaroidTrack.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    polaroidTrack.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      const diffX = touchStartX - e.changedTouches[0].clientX;
+      const diffY = touchStartY - e.changedTouches[0].clientY;
+      // Only slide on horizontal dominant swipes so vertical scrolling stays smooth
+      if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY) * 1.3) {
+        if (diffX > 0) {
+          updateCarousel(currentCarouselIndex + 1);
+        } else {
+          updateCarousel(currentCarouselIndex - 1);
+        }
+      }
+    }, { passive: true });
+
+    if (carouselPrevBtn) {
+      carouselPrevBtn.addEventListener('click', () => updateCarousel(currentCarouselIndex - 1));
+    }
+    if (carouselNextBtn) {
+      carouselNextBtn.addEventListener('click', () => updateCarousel(currentCarouselIndex + 1));
+    }
+
+    if (carouselDots) {
+      carouselDots.addEventListener('click', (e) => {
+        const targetDot = e.target.closest('.dot');
+        if (targetDot) {
+          const idx = parseInt(targetDot.getAttribute('data-index'), 10);
+          updateCarousel(idx);
+        }
+      });
+    }
+  }
+
+  // ==========================================================================
+  // 11. BALLOON POPPING & ACCORDION NOTES
+  // ==========================================================================
+  function setupBalloonInteractions() {
+    if (!balloonCluster) return;
+
+    balloonCluster.addEventListener('click', (e) => {
+      const balloon = e.target.closest('.balloon');
+      if (!balloon || balloon.classList.contains('is-popped')) return;
+
+      const wishId = balloon.getAttribute('data-wish-id');
+      const note = BALLOON_NOTES[wishId];
+      if (!note) return;
+
+      // Mark permanently popped so it pops and plays sound only once
+      balloon.classList.add('is-popped');
+      balloon.setAttribute('aria-disabled', 'true');
+
+      const emojiEl = balloon.querySelector('.balloon-emoji');
+      const titleEl = balloon.querySelector('.balloon-title');
+      if (emojiEl) emojiEl.textContent = '💥';
+      if (titleEl) titleEl.textContent = 'Popped!';
+
+      triggerHaptic([30, 40]);
+      playSparkleSound();
+      fireConfettiBurst(0.5, 0.5, 40);
+
+      if (balloonModalEmoji) balloonModalEmoji.textContent = note.emoji;
+      if (balloonModalTitle) balloonModalTitle.textContent = note.title;
+      if (balloonModalText) balloonModalText.textContent = note.text;
+      openModal(balloonWishModal);
+    });
+  }
+
+  function setupAccordion() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.closest('.accordion-item');
+        const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+        header.setAttribute('aria-expanded', !isExpanded);
+        item.classList.toggle('is-open', !isExpanded);
+        triggerHaptic([15]);
+      });
+    });
+  }
+
+  // ==========================================================================
+  // 12. HEART SHOWER SPAWNER & SHARE ACTIONS
+  // ==========================================================================
+  function spawnFloatingHeart() {
+    loveCount++;
+    if (loveCounterBadge) {
+      loveCounterBadge.textContent = loveCount;
+    }
+    triggerHaptic([15, 20]);
+
+    const heart = document.createElement('div');
+    heart.className = 'flying-heart';
+    const emojis = ['💖', '💕', '💗', '💓', '✨', '🌸', '👑', '⭐'];
+    heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+    const rect = sendLoveBtn ? sendLoveBtn.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight - 150, width: 60 };
+    const randomOffset = (Math.random() - 0.5) * 160;
+    const startX = rect.left + rect.width / 2 + randomOffset;
+    const startY = rect.top;
+
+    heart.style.left = `${Math.max(20, Math.min(window.innerWidth - 40, startX))}px`;
+    heart.style.top = `${startY}px`;
+    heart.style.fontSize = `${Math.random() * 16 + 22}px`;
+    heart.style.animationDuration = `${Math.random() * 0.8 + 1.8}s`;
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2400);
+
+    if (loveCount % 18 === 0) {
+      fireCelebrationFireworks();
+      showToast(`💖 ${loveCount}x Love Showered for Shreya's 18th Birthday!`);
+    }
+  }
+
+  function setupShareActions() {
+    const shareText = "Celebrating Shreya Tiwari's 18th Birthday! Tap to unwrap memories, blow virtual candles, and shower love:";
+    const shareUrl = window.location.href;
+
+    if (shareWhatsAppBtn) {
+      shareWhatsAppBtn.addEventListener('click', () => {
+        const whatsappMsg = `${encodeURIComponent(shareText)}%0A${encodeURIComponent(shareUrl)}`;
+        window.open(`https://api.whatsapp.com/send?text=${whatsappMsg}`, '_blank');
+      });
+    }
+
+    if (copyLinkBtn) {
+      copyLinkBtn.addEventListener('click', () => {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            showToast('Link copied to clipboard! 📋');
+          }).catch(() => {
+            fallbackCopy(shareUrl);
+          });
+        } else {
+          fallbackCopy(shareUrl);
+        }
+      });
+    }
+
+    function fallbackCopy(text) {
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast('Link copied to clipboard! 📋');
+    }
+  }
+
+  // ==========================================================================
+  // 13. AMBIENT BACKGROUND STARRY CANVAS ANIMATION
+  // ==========================================================================
+  function setupAmbientStars() {
+    const canvas = document.getElementById('ambientStarsCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }, { passive: true });
+
+    const stars = [];
+    const STAR_COUNT = 60;
+    const colors = ['#f472b6', '#c084fc', '#fbbf24', '#38bdf8', '#ffffff'];
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.5 + 0.5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: Math.random() * 0.8 + 0.2,
+        speed: Math.random() * 0.3 + 0.1,
+        twinkleSpeed: Math.random() * 0.02 + 0.005
+      });
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+        s.y -= s.speed;
+        if (s.y < 0) s.y = height;
+
+        s.alpha += Math.sin(Date.now() * s.twinkleSpeed) * 0.01;
+        s.alpha = Math.max(0.15, Math.min(0.9, s.alpha));
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = s.alpha;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = s.color;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animateStars);
+    }
+    requestAnimationFrame(animateStars);
+  }
+
+  // ==========================================================================
+  // 14. MODAL CONTROLS
+  // ==========================================================================
+  function openModal(modal) {
+    if (!modal) return;
+    modal.classList.add('is-visible');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.classList.remove('is-visible');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  function setupModals() {
+    if (closeWishModalBtn) closeWishModalBtn.addEventListener('click', () => closeModal(wishModal));
+    if (wishModalAckBtn) wishModalAckBtn.addEventListener('click', () => closeModal(wishModal));
+    if (wishModal) {
+      wishModal.addEventListener('click', (e) => {
+        if (e.target === wishModal) closeModal(wishModal);
+      });
+    }
+
+    if (closeBalloonModalBtn) closeBalloonModalBtn.addEventListener('click', () => closeModal(balloonWishModal));
+    if (closeBalloonAckBtn) closeBalloonAckBtn.addEventListener('click', () => closeModal(balloonWishModal));
+    if (balloonWishModal) {
+      balloonWishModal.addEventListener('click', (e) => {
+        if (e.target === balloonWishModal) closeModal(balloonWishModal);
+      });
+    }
+  }
+
+  // ==========================================================================
+  // 15. PRE-UNLOCK COUNTDOWN LOCK SCREEN
+  // ==========================================================================
+  function setCountdownDigit(el, value) {
+    if (!el) return;
+    const formatted = String(value).padStart(2, '0');
+    if (el.textContent !== formatted) {
+      el.textContent = formatted;
+      el.classList.remove('tick-pop');
+      void el.offsetWidth;
+      el.classList.add('tick-pop');
+    }
+  }
+
+  function activateUnlockReadyState(playCelebration = true) {
+    if (isReadyToUnlock) return;
+    isReadyToUnlock = true;
+
+    if (lockCountdownInterval) {
+      clearInterval(lockCountdownInterval);
+      lockCountdownInterval = null;
+    }
+
+    setCountdownDigit(lockDays, 0);
+    setCountdownDigit(lockHours, 0);
+    setCountdownDigit(lockMins, 0);
+    setCountdownDigit(lockSecs, 0);
+
+    if (lockStatusBadge) {
+      lockStatusBadge.classList.add('is-ready');
+      lockStatusBadge.innerHTML = '<span class="lock-badge-icon">✨</span><span>It\'s Time! Happy 18th Birthday!</span>';
+    }
+
+    if (lockActionBtn) {
+      lockActionBtn.classList.remove('is-waiting');
+      lockActionBtn.classList.add('is-ready');
+      lockActionBtn.textContent = '🎁 Tap to Unwrap Your Surprise!';
+    }
+
+    if (playCelebration) {
+      playSparkleSound();
+      fireConfettiBurst(0.5, 0.45, 70);
+    }
+  }
+
+  function updateLockCountdown() {
+    if (isSiteUnlocked || isReadyToUnlock) return;
+    const diffMs = UNLOCK_TARGET_DATE.getTime() - Date.now();
+
+    if (diffMs <= 0) {
+      activateUnlockReadyState(true);
+      return;
+    }
+
+    const totalSeconds = Math.floor(diffMs / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+
+    setCountdownDigit(lockDays, days);
+    setCountdownDigit(lockHours, hours);
+    setCountdownDigit(lockMins, mins);
+    setCountdownDigit(lockSecs, secs);
+  }
+
+  function unlockMainWebsite({ startAudio = true, isPreview = false } = {}) {
+    if (isSiteUnlocked) return;
+    isSiteUnlocked = true;
+
+    if (lockCountdownInterval) {
+      clearInterval(lockCountdownInterval);
+      lockCountdownInterval = null;
+    }
+
+    triggerHaptic([30, 40, 30]);
+
+    if (mainDeviceContainer) {
+      mainDeviceContainer.classList.remove('is-locked');
+      mainDeviceContainer.classList.add('is-unlocked');
+    }
+
+    if (preUnlockScreen) {
+      preUnlockScreen.classList.add('is-unlocking');
+      setTimeout(() => {
+        preUnlockScreen.classList.add('is-dismissed');
+      }, 650);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    if (startAudio) {
+      startMusic();
+    }
+
+    setTimeout(() => {
+      fireCelebrationFireworks();
+    }, 350);
+
+    if (isPreview) {
+      showToast('🔑 Preview Mode: Unlocked for testing!');
+    } else {
+      showToast('🎉 Welcome to Shreya\'s 18th Birthday!');
+    }
+  }
+
+  function setupLockScreen() {
+    if (!preUnlockScreen || !mainDeviceContainer) {
+      isSiteUnlocked = true;
+      return;
+    }
+
+    if (Date.now() >= UNLOCK_TARGET_DATE.getTime()) {
+      activateUnlockReadyState(false);
+    } else {
+      updateLockCountdown();
+      lockCountdownInterval = setInterval(updateLockCountdown, 1000);
+    }
+
+    if (lockActionBtn) {
+      lockActionBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isReadyToUnlock) {
+          unlockMainWebsite({ startAudio: true, isPreview: false });
+          return;
+        }
+
+        triggerHaptic([35, 30, 35]);
+        if (lockCard) {
+          lockCard.classList.remove('is-shaking');
+          void lockCard.offsetWidth;
+          lockCard.classList.add('is-shaking');
+        }
+        showToast('🔒 Too early! Surprise unlocks on 27th Nov at 12:00 AM!');
+      });
+    }
+  }
+
+  // ==========================================================================
+  // 16. INITIALIZATION ENTRYPOINT
+  // ==========================================================================
+  function init() {
+    // Initialize mobile scroll & ghost-click protection first
+    setupGlobalTouchScrollGuard();
+
+    // Pre-Unlock Countdown Lock Screen (default entry until Nov 27, 2026 00:00:00)
+    setupLockScreen();
+
+    // Envelope trigger strictly on wax seal button (prevents accidental unwrap while scrolling card)
+    if (waxSealBtn) waxSealBtn.addEventListener('click', unwrapEnvelope);
+
+    // Music toggle
+    if (musicToggleBtn) musicToggleBtn.addEventListener('click', toggleMusic);
+
+    // Cake & Candles
+    if (blowCandlesBtn) blowCandlesBtn.addEventListener('click', blowOutCandles);
+    if (micBlowToggleBtn) micBlowToggleBtn.addEventListener('click', toggleMicListening);
+    setupCandleTouchGestures();
+
+    // Log clear guidance on startup if opened over non-secure HTTP (e.g., local IP on mobile)
+    if (!window.isSecureContext || !navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== 'function') {
+      logMicSecurityWarning('Non-secure HTTP origin or unavailable mediaDevices detected on load.');
+    }
+
+    // Timers & Counters
+    updateLiveSeconds();
+    setInterval(updateLiveSeconds, 1000);
+    setupStatsObserver();
+
+    // 10-slot Photo Carousel
+    setupCarouselGestures();
+
+    // Balloons & Accordion
+    setupBalloonInteractions();
+    setupAccordion();
+
+    // Love Shower
+    if (sendLoveBtn) sendLoveBtn.addEventListener('click', spawnFloatingHeart);
+
+    // Floating party confetti button
+    if (floatingPartyBtn) {
+      floatingPartyBtn.addEventListener('click', () => {
+        triggerHaptic([30, 40]);
+        fireCelebrationFireworks();
+      });
+    }
+
+    setupShareActions();
+    setupAmbientStars();
+    setupModals();
+
+    if (isSiteUnlocked) {
+      setTimeout(() => {
+        fireConfettiBurst(0.5, 0.4, 40);
+      }, 800);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+
+</script>
+</body>
+</html>

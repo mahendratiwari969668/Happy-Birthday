@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#130c25">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Happy 18th Birthday Shreya! ✨ Fabulous 18 Celebration</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Animated Background Canvas -->
+  <canvas id="ambientStarsCanvas" class="ambient-stars-canvas"></canvas>
+
+  <!-- Pre-Unlock Countdown Lock Screen (Default Entry Until Nov 27, 2026 00:00:00 AM) -->
+  <section id="preUnlockScreen" class="pre-unlock-screen" aria-label="Birthday Countdown Lock Screen">
+    <div class="lock-floating-decor" aria-hidden="true">
+      <span class="lock-sparkle s1">✨</span>
+      <span class="lock-sparkle s2">💖</span>
+      <span class="lock-sparkle s3">👑</span>
+      <span class="lock-sparkle s4">✨</span>
+      <span class="lock-sparkle s5">🌸</span>
+      <span class="lock-sparkle s6">💫</span>
+    </div>
+
+    <div id="lockCard" class="lock-card">
+      <div id="lockStatusBadge" class="lock-badge">
+        <span class="lock-badge-icon">🔒</span>
+        <span>Unlocking the 18th Chapter...</span>
+      </div>
+
+      <p class="lock-eyebrow">A Royal Surprise For Shreya Tiwari</p>
+      <h1 class="lock-title">Shreya's 18th<br><span>Birthday Vault</span></h1>
+      <p class="lock-subtitle">Unlocks automatically on <strong>27th Nov 2026 • 12:00 AM</strong></p>
+
+      <div class="lock-countdown-grid" aria-live="polite">
+        <div class="lock-box">
+          <span id="lockDays" class="lock-num">00</span>
+          <span class="lock-label">Days</span>
+        </div>
+        <div class="lock-box">
+          <span id="lockHours" class="lock-num">00</span>
+          <span class="lock-label">Hours</span>
+        </div>
+        <div class="lock-box">
+          <span id="lockMins" class="lock-num">00</span>
+          <span class="lock-label">Mins</span>
+        </div>
+        <div class="lock-box">
+          <span id="lockSecs" class="lock-num">00</span>
+          <span class="lock-label">Secs</span>
+        </div>
+      </div>
+
+      <button id="lockActionBtn" class="lock-action-btn is-waiting" type="button">
+        ⏳ Surprise Awaiting...
+      </button>
+
+      <p class="lock-hint">Come back at midnight when the vault opens with memories, music &amp; wishes!</p>
+    </div>
+  </section>
+
+  <!-- Mobile Simulator Frame (Wrapper for Responsive Centering on Wide Screens) -->
+  <div id="mainDeviceContainer" class="mobile-device-container is-locked">
+    
+    <!-- Floating Audio Controller -->
+    <header class="top-nav-bar">
+      <div class="brand-pill">
+        <span class="sparkle-icon">✨</span>
+        <span class="brand-text">Shreya's 18th Birthday</span>
+      </div>
+      <button id="musicToggleBtn" class="music-pill-btn" aria-label="Toggle background music">
+        <span class="music-icon" id="musicIcon">🎵</span>
+        <span class="music-text" id="musicLabel">Play Music</span>
+        <div class="equalizer-bars" id="equalizerBars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </button>
+    </header>
+
+    <!-- Hidden HTML5 Audio Element pointing directly to local audio file -->
+    <audio id="bgMusicAudio" loop preload="auto" src="happy_bday.mpeg" playsinline></audio>
+
+    <main class="mobile-content-stream">
+
+      <!-- ============================================ -->
+      <!-- SECTION 1: HERO LANDING & ENVELOPE UNWRAPPING -->
+      <!-- ============================================ -->
+      <section class="hero-section" id="heroSection">
+        <div class="hero-glow-blob"></div>
+        
+        <div class="hero-badge animate-bounce-subtle">
+          <span class="badge-dot"></span>
+          <span>A Golden Milestone • 27th November</span>
+        </div>
+
+        <h1 class="hero-title">
+          Happy <span class="neon-gradient-text">18th</span><br>
+          Birthday, <span class="shreya-name">Shreya!</span>
+        </h1>
+        <p class="hero-subtitle">
+          To our shining star, welcome to adulthood & your Fabulous 18! A world of magic, joy, and grand dreams awaits you.
+        </p>
+
+        <!-- Interactive 3D Gift Envelope / Unwrap Box -->
+        <div class="envelope-wrapper" id="envelopeWrapper">
+          <div class="envelope" id="envelopeCard">
+            <div class="envelope-flap" id="envelopeFlap"></div>
+            <div class="envelope-pocket"></div>
+            
+            <div class="wax-seal" id="waxSealBtn" role="button" tabindex="0" title="Tap to unseal!">
+              <div class="wax-seal-inner">
+                <span class="wax-number">18</span>
+                <span class="wax-stars">✦</span>
+              </div>
+              <div class="pulse-ring"></div>
+            </div>
+
+            <!-- Letter Inside Envelope -->
+            <div class="envelope-letter" id="envelopeLetter">
+              <div class="letter-stamp">🎂</div>
+              <p class="letter-to">Dearest Shreya,</p>
+              <p class="letter-body">
+                Today is all about celebrating the radiant, kind-hearted, and extraordinary young woman you have become. Welcome to 18! Tap to unwrap every surprise!
+              </p>
+              <div class="letter-signature">With infinite love ❤️</div>
+            </div>
+          </div>
+          <p class="envelope-hint" id="envelopeHint">
+            <span class="hand-indicator">👆</span> Tap the golden <strong>18</strong> seal to unwrap!
+          </p>
+        </div>
+
+        <!-- Quick Scroll Down Pill -->
+        <div class="scroll-down-wrapper">
+          <a href="#statsSection" class="scroll-down-pill">
+            <span>Explore The Magic</span>
+            <span class="down-arrow">↓</span>
+          </a>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 2: INTERACTIVE MILESTONES & STATS    -->
+      <!-- ============================================ -->
+      <section class="stats-section" id="statsSection">
+        <div class="section-header">
+          <span class="section-tag">Golden Milestones</span>
+          <h2 class="section-title">18 Years of Pure Joy ✨</h2>
+          <p class="section-subtitle">Since 27th November 2008, the world has been brighter with you in it.</p>
+        </div>
+
+        <div class="stats-grid">
+          <!-- Stat 1 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-pink-glow">💖</div>
+            <div class="stat-counter" id="countYears" data-target="18">0</div>
+            <div class="stat-unit">Years</div>
+            <p class="stat-desc">Of Pure Magic & Smiles</p>
+          </div>
+
+          <!-- Stat 2 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-purple-glow">🌙</div>
+            <div class="stat-counter" id="countMonths" data-target="216">0</div>
+            <div class="stat-unit">Months</div>
+            <p class="stat-desc">Of Inspiring Everyone</p>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-gold-glow">☀️</div>
+            <div class="stat-counter" id="countDays" data-target="6574">0</div>
+            <div class="stat-unit">Days</div>
+            <p class="stat-desc">Of Spreading Happiness</p>
+          </div>
+
+          <!-- Stat 4 -->
+          <div class="stat-card glass-card" data-tilt>
+            <div class="stat-icon-bubble bg-cyan-glow">✨</div>
+            <div class="stat-counter" id="countHours" data-target="157776">0</div>
+            <div class="stat-unit">Hours</div>
+            <p class="stat-desc">Of Unconditional Love</p>
+          </div>
+        </div>
+
+        <!-- Real-Time Live Ticker Card -->
+        <div class="live-ticker-card glass-card">
+          <div class="ticker-badge">
+            <span class="live-dot"></span> LIVE TICKER
+          </div>
+          <div class="ticker-content">
+            <p class="ticker-label">Seconds of making our lives blessed:</p>
+            <div class="ticker-numbers" id="liveSecondsTicker">568,000,000+</div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 3: VIRTUAL CAKE & CANDLE BLOWING     -->
+      <!-- ============================================ -->
+      <section class="cake-section" id="cakeSection">
+        <div class="section-header">
+          <span class="section-tag">Interactive Ritual</span>
+          <h2 class="section-title">Make an 18th Wish! 🎂</h2>
+          <p class="section-subtitle">
+            Tap or blow gently into your mic to extinguish the candles and make your secret wish!
+          </p>
+        </div>
+
+        <div class="cake-stage glass-card">
+          <!-- Sparkles & Magic Dust -->
+          <div class="magic-dust" id="magicDust"></div>
+
+          <!-- Interactive Cake Graphic -->
+          <div class="cake-container" id="cakeContainer">
+            <!-- Candles Container -->
+            <div class="candles-wrapper">
+              
+              <!-- Candle 1 -->
+              <div class="candle candle-1" data-candle="1">
+                <div class="flame-group" id="flame1">
+                  <div class="flame-glow"></div>
+                  <div class="flame"></div>
+                  <div class="flame-inner"></div>
+                </div>
+                <div class="smoke" id="smoke1"></div>
+                <div class="wick"></div>
+                <div class="candle-stick candle-num-stick">
+                  <span class="candle-digit">1</span>
+                </div>
+              </div>
+
+              <!-- Candle 2 (Changed to 8) -->
+              <div class="candle candle-2" data-candle="2">
+                <div class="flame-group" id="flame2">
+                  <div class="flame-glow"></div>
+                  <div class="flame"></div>
+                  <div class="flame-inner"></div>
+                </div>
+                <div class="smoke" id="smoke2"></div>
+                <div class="wick"></div>
+                <div class="candle-stick candle-num-stick">
+                  <span class="candle-digit">8</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Cake Layers -->
+            <div class="cake-tier tier-top">
+              <div class="icing-drips">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="cherries-row">
+                <span>🍓</span><span>🍒</span><span>🍓</span><span>🍒</span>
+              </div>
+            </div>
+
+            <div class="cake-tier tier-middle">
+              <div class="frosting-layer"></div>
+              <div class="sprinkles-pattern"></div>
+            </div>
+
+            <div class="cake-tier tier-bottom">
+              <div class="cake-ribbon">
+                <span class="ribbon-text">FABULOUS 18 SHREYA</span>
+              </div>
+            </div>
+
+            <div class="cake-plate"></div>
+          </div>
+
+          <!-- Candle Blow Action Trigger / Microphone button -->
+          <div class="blow-controls">
+            <button id="blowCandlesBtn" class="action-btn glow-btn">
+              <span class="btn-icon">💨</span>
+              <span class="btn-text">Blow / Tap to Extinguish</span>
+            </button>
+            <button id="micBlowToggleBtn" class="mic-btn" title="Enable microphone to blow by breath!">
+              <span>🎙️ Use Mic to Blow (or tap above if mic is blocked)</span>
+            </button>
+          </div>
+          <p class="blow-status-hint" id="blowStatusHint">
+            ✨ Both candles are burning bright! Tap the button, swipe the flames, or use your mic!
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 4: POLAROID MEMORY CAROUSEL / SWIPER -->
+      <!-- ============================================ -->
+      <section class="gallery-section" id="gallerySection">
+        <div class="section-header">
+          <span class="section-tag">Cherished Memories</span>
+          <h2 class="section-title">The Shreya Gallery 📸</h2>
+          <p class="section-subtitle">Swipe through the unforgettable moments of laughter, adventures, and milestones.</p>
+        </div>
+
+        <!-- Carousel Container (10 Vertical 9:16 Photo Slots) -->
+        <div class="polaroid-carousel-wrapper">
+          <div class="polaroid-track" id="polaroidTrack">
+            
+            <!-- Photo Slot 1 -->
+            <div class="polaroid-card glass-polaroid active" data-index="0">
+              <div class="washi-tape tape-gold"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 1 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo1.jpg" 
+                     alt="Shreya Memory 1" 
+                     class="polaroid-img">
+                <div class="img-badge">Golden Bond ✨</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"From sweet little smiles to celebrating the big 18 together—some bonds just grow more magical with time."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#MagicalBonds</span>
+                  <span class="heart-react">💖 1 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 2 -->
+            <div class="polaroid-card glass-polaroid" data-index="1">
+              <div class="washi-tape tape-pink"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 2 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo2.jpg" 
+                     alt="Shreya Memory 2" 
+                     class="polaroid-img">
+                <div class="img-badge">Little Princess 👑</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Looking back at the cutest beginnings... little princess with a heart of gold!"</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#CuteBeginnings</span>
+                  <span class="heart-react">💛 2 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 3 -->
+            <div class="polaroid-card glass-polaroid" data-index="2">
+              <div class="washi-tape tape-purple"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 3 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo3.jpg" 
+                     alt="Shreya Memory 3" 
+                     class="polaroid-img">
+                <div class="img-badge">Royal Childhood 👸</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"The royal childhood throne! Crowned with innocence and endless naughtiness."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#ChildhoodThrone</span>
+                  <span class="heart-react">👑 3 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 4 -->
+            <div class="polaroid-card glass-polaroid" data-index="3">
+              <div class="washi-tape tape-cyan"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 4 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo4.jpg" 
+                     alt="Shreya Memory 4" 
+                     class="polaroid-img">
+                <div class="img-badge">Growing Together 🌱</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Growing up side by side, sharing silly jokes, muddy paths, and golden childhood memories."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#GoldenDays</span>
+                  <span class="heart-react">🌟 4 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 5 -->
+            <div class="polaroid-card glass-polaroid" data-index="4">
+              <div class="washi-tape tape-gold"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 5 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo5.jpg" 
+                     alt="Shreya Memory 5" 
+                     class="polaroid-img">
+                <div class="img-badge">Traditional Grace 🪷</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Stepping into traditional grace... shining brighter than a star on your special day."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#ShiningStar</span>
+                  <span class="heart-react">✨ 5 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 6 -->
+            <div class="polaroid-card glass-polaroid" data-index="5">
+              <div class="washi-tape tape-pink"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 6 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo6.jpg" 
+                     alt="Shreya Memory 6" 
+                     class="polaroid-img">
+                <div class="img-badge">Adventure Awaits 🚗</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Adventure awaits! Cruising through life with style, elegance, and dreams in your eyes."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#DreamBig</span>
+                  <span class="heart-react">💫 6 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 7 -->
+            <div class="polaroid-card glass-polaroid" data-index="6">
+              <div class="washi-tape tape-purple"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 7 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo7.jpg" 
+                     alt="Shreya Memory 7" 
+                     class="polaroid-img">
+                <div class="img-badge">Warmth &amp; Grace 🌸</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"A gentle smile that carries so much warmth, grace, and happiness for everyone around."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#GentleSmile</span>
+                  <span class="heart-react">🌸 7 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 8 -->
+            <div class="polaroid-card glass-polaroid" data-index="7">
+              <div class="washi-tape tape-cyan"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 8 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo8.jpg" 
+                     alt="Shreya Memory 8" 
+                     class="polaroid-img">
+                <div class="img-badge">Pure Joy ✨</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Wrapped in elegance and traditions, radiating pure joy in every single frame."</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#PureJoy</span>
+                  <span class="heart-react">💐 8 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 9 -->
+            <div class="polaroid-card glass-polaroid" data-index="8">
+              <div class="washi-tape tape-gold"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 9 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo9.jpg" 
+                     alt="Shreya Memory 9" 
+                     class="polaroid-img">
+                <div class="img-badge">Sweet Candid 📸</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Caught in a sweet candid moment—stay just as vibrant and beautiful as you are!"</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#VibrantSoul</span>
+                  <span class="heart-react">🌼 9 / 10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo Slot 10 -->
+            <div class="polaroid-card glass-polaroid" data-index="9">
+              <div class="washi-tape tape-pink"></div>
+              <div class="polaroid-img-frame">
+                <div class="photo-blur-bg" aria-hidden="true"></div>
+                <div class="photo-placeholder-ui">
+                  <span class="placeholder-cam">📷</span>
+                  <span class="placeholder-title">Photo 10 of 10</span>
+                  <span class="placeholder-sub">Loading memory...</span>
+                </div>
+                <img src="photo10.jpg" 
+                     alt="Shreya Memory 10" 
+                     class="polaroid-img">
+                <div class="img-badge">Fabulous 18 🎉</div>
+              </div>
+              <div class="polaroid-caption">
+                <p class="handwriting">"Entering the 18th chapter of life with new dreams, confidence, and a gorgeous smile. Happy 18th Birthday!"</p>
+                <div class="caption-footer">
+                  <span class="memory-tag">#Happy18th</span>
+                  <span class="heart-react">🎂 10 / 10</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Carousel Controls -->
+          <div class="carousel-nav-bar">
+            <button id="carouselPrevBtn" class="carousel-arrow-btn" aria-label="Previous photo">‹</button>
+            <div class="carousel-dots" id="carouselDots">
+              <span class="dot active" data-index="0"></span>
+              <span class="dot" data-index="1"></span>
+              <span class="dot" data-index="2"></span>
+              <span class="dot" data-index="3"></span>
+              <span class="dot" data-index="4"></span>
+              <span class="dot" data-index="5"></span>
+              <span class="dot" data-index="6"></span>
+              <span class="dot" data-index="7"></span>
+              <span class="dot" data-index="8"></span>
+              <span class="dot" data-index="9"></span>
+            </div>
+            <button id="carouselNextBtn" class="carousel-arrow-btn" aria-label="Next photo">›</button>
+          </div>
+          <div class="carousel-counter-wrap">
+            <span class="carousel-counter-pill" id="carouselCounterPill">Photo 1 / 10</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 5: INTERACTIVE BALLOONS & WISH NOTES -->
+      <!-- ============================================ -->
+      <section class="wishes-section" id="wishesSection">
+        <div class="section-header">
+          <span class="section-tag">Secret Messages</span>
+          <h2 class="section-title">Tap to Pop Wishes! 🎈</h2>
+          <p class="section-subtitle">Each floating balloon holds a sweet blessing written specially for you.</p>
+        </div>
+
+        <!-- Floating Balloons Cluster -->
+        <div class="balloon-cluster" id="balloonCluster">
+          
+          <div class="balloon balloon-pink" data-wish-id="1">
+            <div class="balloon-body">
+              <span class="balloon-emoji">🎁</span>
+              <span class="balloon-title">Family</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+          <div class="balloon balloon-purple" data-wish-id="2">
+            <div class="balloon-body">
+              <span class="balloon-emoji">🌟</span>
+              <span class="balloon-title">Dreams</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+          <div class="balloon balloon-gold" data-wish-id="3">
+            <div class="balloon-body">
+              <span class="balloon-emoji">👑</span>
+              <span class="balloon-title">Turned 18</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+          <div class="balloon balloon-cyan" data-wish-id="4">
+            <div class="balloon-body">
+              <span class="balloon-emoji">💖</span>
+              <span class="balloon-title">Future</span>
+            </div>
+            <div class="balloon-string"></div>
+          </div>
+
+        </div>
+
+        <!-- Accordion Message Cards -->
+        <div class="wish-cards-container">
+          
+          <div class="accordion-item glass-card">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-icon">💌</span>
+              <span class="accordion-title">From Your Proud Family</span>
+              <span class="accordion-chevron">▾</span>
+            </button>
+            <div class="accordion-content">
+              <p>
+                Watching you grow from a playful little toddler into such a confident, graceful, and intelligent young woman stepping into adulthood has been the greatest privilege of our lives. You will always be our pride and joy! Keep conquering hearts and goals with that dazzling smile.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item glass-card">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-icon">💫</span>
+              <span class="accordion-title">18 Blessings for Your Journey</span>
+              <span class="accordion-chevron">▾</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="blessings-list">
+                <li>✨ Unlimited joy, laughter, and grand adventures</li>
+                <li>📚 Academic & career triumphs, and boundless creativity</li>
+                <li>🌸 Loyal friends who always lift you higher</li>
+                <li>👑 Fearless courage to always be unapologetically YOU!</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item glass-card">
+            <button class="accordion-header" aria-expanded="false">
+              <span class="accordion-icon">🎀</span>
+              <span class="accordion-title">An 18th Milestone Promise</span>
+              <span class="accordion-chevron">▾</span>
+            </button>
+            <div class="accordion-content">
+              <p>
+                No matter how high you fly or where adulthood takes your wings, remember you always have a warm home and a family cheering for you at the top of our lungs! Happy 18th Birthday!
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- SECTION 6: CLOSING WISHES & HEART SHOWER     -->
+      <!-- ============================================ -->
+      <section class="closing-section" id="closingSection">
+        <div class="closing-card glass-card">
+          <div class="closing-crown">👑</div>
+          <h2 class="closing-title">To The Brightest 18th Chapter!</h2>
+          <p class="closing-text">
+            "May your days be sprinkled with stardust, your heart be filled with music, and your adulthood be as extraordinary and beautiful as you are."
+          </p>
+          <div class="closing-dedication">
+            <span>With all our love, always & forever ❤️</span>
+          </div>
+
+          <!-- Send Love / Interactive Heart Shower Button -->
+          <div class="heart-shower-action">
+            <button id="sendLoveBtn" class="love-blast-btn" aria-label="Send flying hearts">
+              <span class="love-btn-emoji">💖</span>
+              <span class="love-btn-text">Shower Shreya With Love</span>
+              <span class="love-counter" id="loveCounterBadge">0</span>
+            </button>
+            <p class="love-hint">Tap rapidly to shower floating love! 💕</p>
+          </div>
+
+          <!-- Share Birthday Link Button -->
+          <div class="share-actions-row">
+            <button id="shareWhatsAppBtn" class="share-btn whatsapp-btn">
+              <span>📲 Share on WhatsApp</span>
+            </button>
+            <button id="copyLinkBtn" class="share-btn copy-btn">
+              <span>📋 Copy Link</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Note -->
+      <footer class="mobile-footer">
+        <p>Crafted with endless love for Shreya Tiwari's 18th Birthday ✨</p>
+        <p class="footer-sub">27th November • Welcome to Adulthood</p>
+      </footer>
+
+    </main>
+
+    <!-- Floating Confetti Trigger Button (Always reachable) -->
+    <button id="floatingPartyBtn" class="floating-party-btn" aria-label="Trigger confetti celebration">
+      🎉
+    </button>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MODAL 1: MAKE A WISH POP-UP (POST-CANDLE)    -->
+  <!-- ============================================ -->
+  <div class="modal-backdrop" id="wishModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card animate-pop">
+      <button class="modal-close-btn" id="closeWishModalBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-sparkle-header">
+        <span class="big-emoji">✨🎂✨</span>
+        <h3 class="modal-title">Wish Released to the Stars!</h3>
+      </div>
+      <p class="modal-message">
+        You blew out your 18 candles, Shreya! Your wish is on its way to the universe. May your 18th year and the exciting journey into adulthood bring you boundless happiness, success, and wonder!
+      </p>
+      <div class="wish-fortune-box">
+        <div class="fortune-badge">✨ 18th Birthday Blessing ✨</div>
+        <p class="fortune-text" id="fortuneText">
+          "The stars shine a little brighter today because it's the day you blessed our world 18 years ago."
+        </p>
+      </div>
+      <button class="action-btn glow-btn w-full" id="wishModalAckBtn">
+        <span>Claim My 18th Year! 💖</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MODAL 2: BALLOON POP SECRET MESSAGE          -->
+  <!-- ============================================ -->
+  <div class="modal-backdrop" id="balloonWishModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card glass-card animate-pop">
+      <button class="modal-close-btn" id="closeBalloonModalBtn" aria-label="Close modal">&times;</button>
+      <div class="balloon-pop-badge" id="balloonModalEmoji">🎈</div>
+      <h3 class="modal-title" id="balloonModalTitle">Secret Note For You</h3>
+      <p class="modal-message" id="balloonModalText">
+        You discovered a secret wish!
+      </p>
+      <button class="action-btn glow-btn w-full" id="closeBalloonAckBtn">
+        <span>Aww, Thank You! 💖</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Screen Toast Notification -->
+  <div id="toastNotification" class="toast-notice">Link copied to clipboard! 📋</div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>

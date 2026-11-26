@@ -1862,6 +1862,717 @@ button, a, label, .wax-seal, .balloon, .candle, .dot {
   animation: floatUpAndFade 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
+/* ==========================================================================
+   SECTION 7: 18th BIRTHDAY RIDDLE QUEST & MYSTERY GIFT BOX
+   ========================================================================== */
+.riddle-quest-section {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+}
+
+.riddle-quest-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(30, 16, 58, 0.88), rgba(18, 9, 36, 0.94));
+  border: 1px solid rgba(232, 121, 249, 0.35);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5),
+              0 0 35px rgba(192, 132, 252, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 22px 18px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.riddle-quest-card.is-shaking {
+  animation: riddleCardShake 0.48s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes riddleCardShake {
+  10%, 90% { transform: translateX(-3px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+
+/* Progress Tracker */
+.riddle-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.riddle-step-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid rgba(232, 121, 249, 0.3);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #f5d0fe;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.riddle-step-pill .step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f472b6;
+  box-shadow: 0 0 8px #f472b6;
+  animation: pulseHint 1.8s infinite;
+}
+
+.riddle-progress-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.riddle-progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ec4899, #f43f5e 50%, #fbbf24 100%);
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.7);
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Riddle Question Box */
+.riddle-question-card {
+  text-align: center;
+  padding: 16px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  margin-bottom: 14px;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.riddle-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fbcfe8;
+  background: rgba(244, 114, 182, 0.18);
+  border: 1px solid rgba(244, 114, 182, 0.35);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.riddle-question-text {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Riddle Options Grid (Mobile Tap Friendly) */
+.riddle-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.riddle-option-btn {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f8fafc;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.riddle-option-btn:active {
+  transform: scale(0.97);
+}
+
+.riddle-option-key {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 8px;
+  background: rgba(192, 132, 252, 0.22);
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  color: #f5d0fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.riddle-option-text {
+  flex: 1;
+  line-height: 1.35;
+}
+
+/* Option States */
+.riddle-option-btn.is-wrong {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(244, 63, 94, 0.45));
+  border-color: #f87171;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.45);
+  color: #ffffff;
+  animation: riddleBtnShake 0.45s ease-in-out;
+}
+
+.riddle-option-btn.is-wrong .riddle-option-key {
+  background: rgba(239, 68, 68, 0.6);
+  border-color: #fca5a5;
+  color: #fff;
+}
+
+.riddle-option-btn.is-correct {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.45), rgba(16, 185, 129, 0.55));
+  border-color: #4ade80;
+  box-shadow: 0 0 22px rgba(74, 222, 128, 0.5);
+  color: #ffffff;
+}
+
+.riddle-option-btn.is-correct .riddle-option-key {
+  background: rgba(34, 197, 94, 0.7);
+  border-color: #86efac;
+  color: #fff;
+}
+
+@keyframes riddleBtnShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.riddle-feedback-notice {
+  text-align: center;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #f472b6;
+  min-height: 22px;
+  margin-top: 10px;
+  transition: opacity 0.2s ease;
+}
+
+/* ==========================================================================
+   PHASE 2: MYSTERY GIFT BOX
+   ========================================================================== */
+.mystery-gift-container {
+  text-align: center;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: voucherReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mystery-gift-badge {
+  display: inline-block;
+  padding: 5px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fef08a;
+  background: rgba(251, 191, 36, 0.2);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.35);
+}
+
+.mystery-gift-title {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 14px rgba(244, 114, 182, 0.4);
+}
+
+.mystery-gift-sub {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 3D / Illustrated Glowing Gift Box */
+.mystery-gift-box-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 22px 0 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gift-box-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, rgba(244, 114, 182, 0.25) 45%, transparent 70%);
+  pointer-events: none;
+  animation: giftGlowPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes giftGlowPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.18);
+    opacity: 0.95;
+  }
+}
+
+.gift-box-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gift-box-particles .gp {
+  position: absolute;
+  font-size: 1.15rem;
+  animation: giftParticleFloat 3s ease-in-out infinite;
+}
+
+.gift-box-particles .gp-1 { top: 12%; left: 24%; animation-delay: 0s; }
+.gift-box-particles .gp-2 { top: 18%; right: 22%; animation-delay: 0.8s; }
+.gift-box-particles .gp-3 { bottom: 26%; left: 22%; animation-delay: 1.4s; }
+.gift-box-particles .gp-4 { bottom: 24%; right: 24%; animation-delay: 2.1s; }
+
+@keyframes giftParticleFloat {
+  0%, 100% { transform: translateY(0) scale(0.9); opacity: 0.4; }
+  50% { transform: translateY(-8px) scale(1.2); opacity: 0.95; }
+}
+
+.gift-box-3d {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  animation: giftBoxFloat 3.2s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.mystery-gift-box-wrapper:active .gift-box-3d {
+  transform: scale(0.92);
+}
+
+@keyframes giftBoxFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.gift-lid {
+  position: relative;
+  width: 104px;
+  height: 28px;
+  border-radius: 8px 8px 4px 4px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 18px rgba(251, 191, 36, 0.4);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-bow {
+  position: absolute;
+  top: -16px;
+  font-size: 1.8rem;
+  filter: drop-shadow(0 2px 8px rgba(244, 63, 94, 0.6));
+  animation: bowBob 2s ease-in-out infinite alternate;
+}
+
+@keyframes bowBob {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+.gift-body {
+  position: relative;
+  width: 92px;
+  height: 72px;
+  margin-top: -2px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(145deg, #ec4899 0%, #be185d 60%, #831843 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gift-body-ribbon-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  background: linear-gradient(180deg, #fde047, #f59e0b);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+.gift-body-ribbon-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background: linear-gradient(90deg, #fde047, #f59e0b);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+.gift-icon-center {
+  position: relative;
+  z-index: 3;
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+.gift-tap-hint {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #f472b6;
+  margin: 8px 0 0;
+  letter-spacing: 0.3px;
+  animation: pulseHint 2s infinite;
+}
+
+.open-gift-btn {
+  font-size: 1.05rem;
+  padding: 15px 22px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f43f5e 55%, #ec4899 100%);
+  border: none;
+  box-shadow: 0 8px 25px rgba(244, 63, 94, 0.55), 0 0 20px rgba(251, 191, 36, 0.4);
+  animation: giftButtonPulse 1.9s ease-in-out infinite;
+}
+
+@keyframes giftButtonPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(244, 63, 94, 0.55), 0 0 20px rgba(251, 191, 36, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.7), 0 0 28px rgba(244, 63, 94, 0.6);
+  }
+}
+
+/* ==========================================================================
+   PHASE 3: SHINY GOLDEN VOUCHER / SECRET NOTE CARD
+   ========================================================================== */
+.golden-voucher-container {
+  padding: 4px 0;
+  animation: voucherReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes voucherReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.golden-voucher-card {
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, rgba(251, 191, 36, 0.25), transparent 70%),
+              linear-gradient(145deg, #1c1304 0%, #2b1b06 50%, #160e03 100%);
+  border: 2px solid #fbbf24;
+  border-radius: 20px;
+  padding: 24px 18px;
+  box-shadow: 0 0 35px rgba(251, 191, 36, 0.35),
+              0 14px 40px rgba(0, 0, 0, 0.65),
+              inset 0 0 25px rgba(245, 158, 11, 0.18);
+  text-align: center;
+  overflow: hidden;
+}
+
+.voucher-shimmer {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(254, 240, 138, 0.18) 50%,
+    rgba(255, 255, 255, 0) 58%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  animation: voucherShimmer 5s ease-in-out infinite;
+}
+
+@keyframes voucherShimmer {
+  0%, 100% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+  45%, 60% {
+    transform: translateX(100%) rotate(25deg);
+  }
+}
+
+.voucher-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.voucher-crown {
+  font-size: 1.7rem;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
+}
+
+.voucher-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fde68a;
+  text-transform: uppercase;
+}
+
+.voucher-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 6px 0 10px;
+  text-shadow: 0 0 18px rgba(251, 191, 36, 0.55);
+}
+
+.voucher-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #fbbf24 50%, transparent);
+  margin: 12px 0 16px;
+}
+
+.voucher-secret-text {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  font-weight: 600;
+  color: #fffbeb;
+  background: rgba(251, 191, 36, 0.14);
+  border: 1.5px dashed rgba(251, 191, 36, 0.5);
+  border-radius: 14px;
+  padding: 18px 14px;
+  margin: 0 0 16px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+  position: relative;
+  z-index: 1;
+}
+
+.voucher-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fbbf24;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.voucher-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.voucher-claim-btn {
+  flex: 1.3;
+  padding: 12px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #1c1304;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.45);
+  transition: transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.voucher-claim-btn:active {
+  transform: scale(0.95);
+}
+
+.voucher-replay-btn {
+  flex: 1;
+  padding: 12px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  color: #fef08a;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.voucher-replay-btn:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ==========================================================================
+   REVEALED REAL GIFT PHOTO CONTAINER & FRAMING
+   ========================================================================== */
+.revealed-gift-wrap {
+  width: 100%;
+  margin: 14px 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  animation: giftPhotoReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes giftPhotoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(18px);
+  }
+  65% {
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.revealed-gift-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fef08a;
+  background: rgba(251, 191, 36, 0.22);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.35);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.revealed-gift-frame {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  border-radius: 18px;
+  border: 2px solid #fbbf24;
+  background: radial-gradient(circle at center, rgba(251, 191, 36, 0.14), rgba(15, 8, 28, 0.88));
+  box-shadow: 0 0 28px rgba(251, 191, 36, 0.45), 0 12px 32px rgba(0, 0, 0, 0.7);
+  padding: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.revealed-gift-ambient-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(251, 191, 36, 0.28), transparent 70%);
+  pointer-events: none;
+  animation: giftGlowPulse 2.8s ease-in-out infinite;
+}
+
+.revealed-gift-photo {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+.revealed-gift-caption {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fde047;
+  margin: 10px 0 2px;
+  text-align: center;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.voucher-claim-btn.is-unveiled {
+  background: linear-gradient(135deg, #22c55e, #10b981);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
 /* Footer */
 .mobile-footer {
   text-align: center;
@@ -2786,6 +3497,143 @@ button, a, label, .wax-seal, .balloon, .candle, .dot {
         </div>
       </section>
 
+      <!-- ============================================ -->
+      <!-- SECTION 7: 18th BIRTHDAY RIDDLE QUEST & MYSTERY GIFT BOX -->
+      <!-- ============================================ -->
+      <section class="riddle-quest-section" id="riddleQuestSection">
+        <div class="section-header">
+          <span class="section-tag">Birthday Mystery Quest</span>
+          <h2 class="section-title">Solve 3 Riddles to Unlock Your Real Birthday Gift! 🎁</h2>
+          <p class="section-subtitle">
+            Can you crack all 3 fun clues, birthday girl? Solve them to reveal the secret mystery gift box! ✨
+          </p>
+        </div>
+
+        <div class="riddle-quest-card glass-card" id="riddleQuestCard">
+          
+          <!-- Phase 1: Riddles Quest Container -->
+          <div class="riddle-active-container" id="riddleActiveContainer">
+            <!-- Progress Tracker -->
+            <div class="riddle-progress-wrap">
+              <div class="riddle-step-pill" id="riddleStepPill">
+                <span class="step-dot active"></span>
+                <span id="riddleStepText">Step 1 of 3</span>
+              </div>
+              <div class="riddle-progress-track">
+                <div class="riddle-progress-bar" id="riddleProgressBar" style="width: 33.33%;"></div>
+              </div>
+            </div>
+
+            <!-- Riddle Question Card -->
+            <div class="riddle-question-card" id="riddleQuestionCard">
+              <span class="riddle-badge" id="riddleBadge">Riddle #1 • Milestone Clue</span>
+              <p class="riddle-question-text" id="riddleQuestionText">
+                "I start at 18, bring freedom, new dreams, and make you officially an adult. What am I?"
+              </p>
+            </div>
+
+            <!-- Riddle Option Buttons (Multiple Choice) -->
+            <div class="riddle-options-grid" id="riddleOptionsGrid" role="group" aria-label="Riddle Options">
+              <button class="riddle-option-btn" type="button" data-key="A" data-index="0">
+                <span class="riddle-option-key">A</span>
+                <span class="riddle-option-text">Childhood</span>
+              </button>
+              <button class="riddle-option-btn" type="button" data-key="B" data-index="1">
+                <span class="riddle-option-key">B</span>
+                <span class="riddle-option-text">Adulthood / 18th Chapter</span>
+              </button>
+              <button class="riddle-option-btn" type="button" data-key="C" data-index="2">
+                <span class="riddle-option-key">C</span>
+                <span class="riddle-option-text">Homework</span>
+              </button>
+            </div>
+
+            <div class="riddle-feedback-notice" id="riddleFeedbackNotice" aria-live="polite"></div>
+          </div>
+
+          <!-- Phase 2: Mystery Gift Box Unlocked -->
+          <div class="mystery-gift-container" id="mysteryGiftContainer" style="display: none;">
+            <div class="mystery-gift-badge">✨ All 3 Riddles Solved! ✨</div>
+            <h3 class="mystery-gift-title">You Crushed The Quest, Shreya! 👑</h3>
+            <p class="mystery-gift-sub">A special 18th milestone mystery gift has been unlocked for you!</p>
+
+            <div class="mystery-gift-box-wrapper" id="mysteryGiftBoxWrapper" role="button" tabindex="0" aria-label="Tap to open your mystery gift box">
+              <div class="gift-box-glow"></div>
+              <div class="gift-box-particles" aria-hidden="true">
+                <span class="gp gp-1">✨</span>
+                <span class="gp gp-2">💖</span>
+                <span class="gp gp-3">⭐</span>
+                <span class="gp gp-4">✨</span>
+              </div>
+              <div class="gift-box-3d" id="giftBox3D">
+                <div class="gift-lid">
+                  <div class="gift-bow">🎀</div>
+                </div>
+                <div class="gift-body">
+                  <span class="gift-body-ribbon-v"></span>
+                  <span class="gift-body-ribbon-h"></span>
+                  <span class="gift-icon-center">🎁</span>
+                </div>
+              </div>
+              <p class="gift-tap-hint">Tap the box or button below</p>
+            </div>
+
+            <button id="openGiftBoxBtn" class="action-btn glow-btn w-full open-gift-btn" type="button">
+              <span>🎁 Tap to Open Your Gift!</span>
+            </button>
+          </div>
+
+          <!-- Phase 3: Golden Voucher / Secret Note Card -->
+          <div class="golden-voucher-container" id="goldenVoucherContainer" style="display: none;">
+            <div class="golden-voucher-card">
+              <div class="voucher-shimmer" aria-hidden="true"></div>
+              <div class="voucher-header">
+                <span class="voucher-crown">👑</span>
+                <span class="voucher-tag">Official 18th Milestone Pass</span>
+              </div>
+              <h3 class="voucher-title">Golden Birthday Voucher ✨</h3>
+              <div class="voucher-divider"></div>
+
+              <!-- EDIT YOUR REAL GIFT MESSAGE / CLUE HERE -->
+              <p class="voucher-secret-text" id="riddleGiftMessage">
+ Congratulations Shreya! You unlocked your special 18th Birthday Gift!
+                <h3> "Your birthday gift is on top of the boxes."</h3>     
+                <span>Hint : </span><span>Red+white -> Pink -> Black</span>        
+               </p>
+
+              <!-- Revealed Gift Photo (Hidden initially until 'Claim My Surprise' is clicked) -->
+              <div class="revealed-gift-wrap" id="revealedGiftWrap" style="display: none;">
+                <div class="revealed-gift-badge">🎁 Your Official 18th Birthday Gift 🎁</div>
+                <div class="revealed-gift-frame">
+                  <div class="revealed-gift-ambient-glow"></div>
+                  <!-- Update extension to .png or .webp if needed -->
+                  <img src="gift.jpeg" 
+                       id="revealedGiftImg" 
+                       alt="Shreya's 18th Birthday Gift" 
+                       class="revealed-gift-photo" 
+                       loading="lazy" 
+                       onerror="if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='gift.jpeg';}else if(this.dataset.fallback==='1'){this.dataset.fallback='2';this.src='gift.png';}">
+                </div>
+                <p class="revealed-gift-caption">✨ Here it is! Your real 18th birthday surprise! ✨</p>
+              </div>
+
+              <div class="voucher-meta">
+                <span class="voucher-serial">VOUCHER #SHREYA-18-BLESSED</span>
+                <span class="voucher-seal">SEALED WITH LOVE ❤️</span>
+              </div>
+
+              <div class="voucher-actions">
+                <button id="voucherCelebrateBtn" class="voucher-claim-btn" type="button">
+                  <span>🎊 Claim My Surprise!</span>
+                </button>
+                
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- Footer Note -->
       <footer class="mobile-footer">
         <p>Crafted with endless love for Shreya Tiwari's 18th Birthday ✨</p>
@@ -2867,7 +3715,7 @@ button, a, label, .wax-seal, .balloon, .candle, .dot {
   // 1. CONFIGURATION & STATE
   // ==========================================================================
   const BIRTH_DATE = new Date(2008, 10, 27, 0, 0, 0); // November 27, 2008
-  const UNLOCK_TARGET_DATE = new Date(2026, 10, 27, 0, 0, 0); // November 27, 2026, 12:00:00 AM
+  const UNLOCK_TARGET_DATE = new Date(2026, 10, 2, 0, 0, 0); // November 27, 2026, 12:00:00 AM
   let audioContext = null;
   let isPlaying = false; // Strict single source of truth for music playback
   let isSiteUnlocked = false;
@@ -2919,6 +3767,43 @@ button, a, label, .wax-seal, .balloon, .candle, .dot {
       text: 'This milestone 18th chapter is the opening of your greatest adventure yet. May good health, genuine friendships, wisdom, and boundless success accompany you always.'
     }
   };
+
+  // 18th Birthday Riddle Quest & Mystery Gift Box Data
+  const RIDDLES_DATA = [
+    {
+      step: 1,
+      badge: 'Riddle #1 • Milestone Clue',
+      question: 'I start at 18, bring freedom, new dreams, and make you officially an adult. What am I?',
+      options: [
+        { key: 'A', text: 'Childhood', isCorrect: false },
+        { key: 'B', text: 'Adulthood / 18th Chapter', isCorrect: true },
+        { key: 'C', text: 'Homework', isCorrect: false }
+      ]
+    },
+    {
+      step: 2,
+      badge: 'Riddle #2 • Mystery Clue',
+      question: 'The more you take away from me, the bigger I get. What am I?',
+      options: [
+        { key: 'A', text: 'A Hole', isCorrect: true },
+        { key: 'B', text: 'Birthday Cake', isCorrect: false },
+        { key: 'C', text: 'A Secret', isCorrect: false }
+      ]
+    },
+    {
+      step: 3,
+      badge: 'Riddle #3 • The Final Key',
+      question: 'What has to be broken before you can use it, just like a birthday surprise?',
+      options: [
+        { key: 'A', text: 'A Promise', isCorrect: false },
+        { key: 'B', text: 'An Egg / Gift Seal', isCorrect: true },
+        { key: 'C', text: 'A Mirror', isCorrect: false }
+      ]
+    }
+  ];
+
+  let currentRiddleIndex = 0;
+  let isRiddleAnsweringLocked = false;
 
   // ==========================================================================
   // 2. DOM ELEMENT REFERENCES
@@ -2973,6 +3858,24 @@ button, a, label, .wax-seal, .balloon, .candle, .dot {
   const balloonModalEmoji = document.getElementById('balloonModalEmoji');
   const balloonModalTitle = document.getElementById('balloonModalTitle');
   const balloonModalText = document.getElementById('balloonModalText');
+
+  // Riddle Quest & Mystery Gift Box DOM Elements
+  const riddleQuestCard = document.getElementById('riddleQuestCard');
+  const riddleActiveContainer = document.getElementById('riddleActiveContainer');
+  const riddleStepText = document.getElementById('riddleStepText');
+  const riddleProgressBar = document.getElementById('riddleProgressBar');
+  const riddleBadge = document.getElementById('riddleBadge');
+  const riddleQuestionText = document.getElementById('riddleQuestionText');
+  const riddleOptionsGrid = document.getElementById('riddleOptionsGrid');
+  const riddleFeedbackNotice = document.getElementById('riddleFeedbackNotice');
+  const mysteryGiftContainer = document.getElementById('mysteryGiftContainer');
+  const mysteryGiftBoxWrapper = document.getElementById('mysteryGiftBoxWrapper');
+  const openGiftBoxBtn = document.getElementById('openGiftBoxBtn');
+  const goldenVoucherContainer = document.getElementById('goldenVoucherContainer');
+  const revealedGiftWrap = document.getElementById('revealedGiftWrap');
+  const revealedGiftImg = document.getElementById('revealedGiftImg');
+  const voucherCelebrateBtn = document.getElementById('voucherCelebrateBtn');
+  const resetRiddlesBtn = document.getElementById('resetRiddlesBtn');
 
   // ==========================================================================
   // 3. MOBILE SCROLL & GHOST-CLICK GUARD
@@ -4056,7 +4959,223 @@ button, a, label, .wax-seal, .balloon, .candle, .dot {
   }
 
   // ==========================================================================
-  // 16. INITIALIZATION ENTRYPOINT
+  // 16. 18th BIRTHDAY RIDDLE QUEST & MYSTERY GIFT BOX
+  // ==========================================================================
+  function renderCurrentRiddle() {
+    if (!riddleOptionsGrid || !riddleQuestionText) return;
+    const riddle = RIDDLES_DATA[currentRiddleIndex];
+    if (!riddle) return;
+
+    if (riddleStepText) {
+      riddleStepText.textContent = `Step ${currentRiddleIndex + 1} of ${RIDDLES_DATA.length}`;
+    }
+
+    if (riddleProgressBar) {
+      const pct = ((currentRiddleIndex + 1) / RIDDLES_DATA.length) * 100;
+      riddleProgressBar.style.width = `${pct}%`;
+    }
+
+    if (riddleBadge) {
+      riddleBadge.textContent = riddle.badge;
+    }
+
+    riddleQuestionText.textContent = `"${riddle.question}"`;
+
+    if (riddleFeedbackNotice) {
+      riddleFeedbackNotice.textContent = '';
+      riddleFeedbackNotice.style.opacity = '0';
+    }
+
+    riddleOptionsGrid.innerHTML = '';
+    riddle.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'riddle-option-btn';
+      btn.type = 'button';
+      btn.setAttribute('data-key', opt.key);
+      btn.setAttribute('data-index', idx);
+      btn.innerHTML = `<span class="riddle-option-key">${opt.key}</span><span class="riddle-option-text">${opt.text}</span>`;
+      btn.addEventListener('click', (e) => handleRiddleOptionClick(e, opt, btn));
+      riddleOptionsGrid.appendChild(btn);
+    });
+  }
+
+  function handleRiddleOptionClick(e, option, btn) {
+    if (e) e.stopPropagation();
+    // Guard against ghost clicks during scrolling / dragging
+    if (touchMovedDuringGesture || isRiddleAnsweringLocked) return;
+
+    if (option.isCorrect) {
+      isRiddleAnsweringLocked = true;
+      btn.classList.add('is-correct');
+      triggerHaptic([20, 30]);
+      playSparkleSound();
+      fireConfettiBurst(0.5, 0.6, 25);
+
+      if (riddleFeedbackNotice) {
+        riddleFeedbackNotice.textContent = '✨ Correct! Spot on, birthday girl! 🎉';
+        riddleFeedbackNotice.style.opacity = '1';
+      }
+
+      setTimeout(() => {
+        if (currentRiddleIndex < RIDDLES_DATA.length - 1) {
+          currentRiddleIndex++;
+          isRiddleAnsweringLocked = false;
+          renderCurrentRiddle();
+        } else {
+          isRiddleAnsweringLocked = false;
+          revealMysteryGiftBox();
+        }
+      }, 700);
+    } else {
+      btn.classList.add('is-wrong');
+      triggerHaptic([35, 40]);
+
+      if (riddleQuestCard) {
+        riddleQuestCard.classList.remove('is-shaking');
+        void riddleQuestCard.offsetWidth;
+        riddleQuestCard.classList.add('is-shaking');
+      }
+
+      const wrongMsg = 'Oops! Try again birthday girl 😉';
+      if (riddleFeedbackNotice) {
+        riddleFeedbackNotice.textContent = wrongMsg;
+        riddleFeedbackNotice.style.opacity = '1';
+      }
+      showToast(wrongMsg);
+
+      setTimeout(() => {
+        btn.classList.remove('is-wrong');
+      }, 600);
+    }
+  }
+
+  function revealMysteryGiftBox() {
+    if (riddleActiveContainer) riddleActiveContainer.style.display = 'none';
+    if (mysteryGiftContainer) {
+      mysteryGiftContainer.style.display = 'flex';
+    }
+
+    fireCelebrationFireworks();
+    playSparkleSound();
+    triggerHaptic([30, 50, 40]);
+    showToast('🎁 All 3 Riddles Solved! Mystery Gift Unlocked!');
+  }
+
+  function openMysteryGiftBox() {
+    if (mysteryGiftContainer) mysteryGiftContainer.style.display = 'none';
+    if (goldenVoucherContainer) {
+      goldenVoucherContainer.style.display = 'block';
+    }
+
+    // Keep gift photo hidden initially until user clicks "Claim My Surprise"
+    if (revealedGiftWrap) {
+      revealedGiftWrap.style.display = 'none';
+    }
+
+    fireCelebrationFireworks();
+    fireConfettiBurst(0.5, 0.45, 80);
+    playSparkleSound();
+    triggerHaptic([40, 80, 50, 100]);
+    showToast('✨ Secret Birthday Gift Voucher Unlocked! ✨');
+  }
+
+  function revealGiftPhoto() {
+    if (revealedGiftWrap) {
+      revealedGiftWrap.style.display = 'flex';
+      setTimeout(() => {
+        try {
+          revealedGiftWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (e) { /* ignore */ }
+      }, 100);
+    }
+
+    if (voucherCelebrateBtn) {
+      voucherCelebrateBtn.innerHTML = '<span>🎁 Gift Unveiled! 🎉</span>';
+      voucherCelebrateBtn.classList.add('is-unveiled');
+    }
+
+    fireCelebrationFireworks();
+    fireConfettiBurst(0.5, 0.5, 75);
+    playSparkleSound();
+    triggerHaptic([35, 50, 40]);
+    showToast('🎁 Happy 18th Birthday Shreya! Here is your surprise gift! ✨');
+  }
+
+  function resetRiddleQuest() {
+    currentRiddleIndex = 0;
+    isRiddleAnsweringLocked = false;
+    if (revealedGiftWrap) revealedGiftWrap.style.display = 'none';
+    if (voucherCelebrateBtn) {
+      voucherCelebrateBtn.innerHTML = '<span>🎊 Claim My Surprise!</span>';
+      voucherCelebrateBtn.classList.remove('is-unveiled');
+    }
+    if (goldenVoucherContainer) goldenVoucherContainer.style.display = 'none';
+    if (mysteryGiftContainer) mysteryGiftContainer.style.display = 'none';
+    if (riddleActiveContainer) riddleActiveContainer.style.display = 'block';
+    renderCurrentRiddle();
+    showToast('🔄 Riddle Quest Reset - Have fun!');
+  }
+
+  function setupRiddleQuest() {
+    if (!riddleQuestCard) return;
+
+    renderCurrentRiddle();
+
+    // Auto-fallback for gift image extension (tries .jpeg, .png, .webp if .jpg is not found)
+    if (revealedGiftImg) {
+      revealedGiftImg.addEventListener('error', () => {
+        const src = revealedGiftImg.getAttribute('src') || '';
+        if (src.endsWith('.jpg')) {
+          revealedGiftImg.src = 'gift.jpeg';
+        } else if (src.endsWith('.jpeg')) {
+          revealedGiftImg.src = 'gift.png';
+        } else if (src.endsWith('.png')) {
+          revealedGiftImg.src = 'gift.webp';
+        }
+      });
+    }
+
+    if (mysteryGiftBoxWrapper) {
+      mysteryGiftBoxWrapper.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        openMysteryGiftBox();
+      });
+      mysteryGiftBoxWrapper.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openMysteryGiftBox();
+        }
+      });
+    }
+
+    if (openGiftBoxBtn) {
+      openGiftBoxBtn.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        openMysteryGiftBox();
+      });
+    }
+
+    if (voucherCelebrateBtn) {
+      voucherCelebrateBtn.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        revealGiftPhoto();
+      });
+    }
+
+    if (resetRiddlesBtn) {
+      resetRiddlesBtn.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        resetRiddleQuest();
+      });
+    }
+  }
+
+  // ==========================================================================
+  // 17. INITIALIZATION ENTRYPOINT
   // ==========================================================================
   function init() {
     // Initialize mobile scroll & ghost-click protection first
@@ -4107,6 +5226,7 @@ button, a, label, .wax-seal, .balloon, .candle, .dot {
     setupShareActions();
     setupAmbientStars();
     setupModals();
+    setupRiddleQuest();
 
     if (isSiteUnlocked) {
       setTimeout(() => {

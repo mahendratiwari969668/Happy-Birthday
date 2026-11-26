@@ -18,7 +18,7 @@
   // 1. CONFIGURATION & STATE
   // ==========================================================================
   const BIRTH_DATE = new Date(2008, 10, 27, 0, 0, 0); // November 27, 2008
-  const UNLOCK_TARGET_DATE = new Date(2026, 10, 27, 0, 0, 0); // November 27, 2026, 12:00:00 AM
+  const UNLOCK_TARGET_DATE = new Date(2026, 10, 2, 0, 0, 0); // November 27, 2026, 12:00:00 AM
   let audioContext = null;
   let isPlaying = false; // Strict single source of truth for music playback
   let isSiteUnlocked = false;
@@ -70,6 +70,43 @@
       text: 'This milestone 18th chapter is the opening of your greatest adventure yet. May good health, genuine friendships, wisdom, and boundless success accompany you always.'
     }
   };
+
+  // 18th Birthday Riddle Quest & Mystery Gift Box Data
+  const RIDDLES_DATA = [
+    {
+      step: 1,
+      badge: 'Riddle #1 • Milestone Clue',
+      question: 'I start at 18, bring freedom, new dreams, and make you officially an adult. What am I?',
+      options: [
+        { key: 'A', text: 'Childhood', isCorrect: false },
+        { key: 'B', text: 'Adulthood / 18th Chapter', isCorrect: true },
+        { key: 'C', text: 'Homework', isCorrect: false }
+      ]
+    },
+    {
+      step: 2,
+      badge: 'Riddle #2 • Mystery Clue',
+      question: 'The more you take away from me, the bigger I get. What am I?',
+      options: [
+        { key: 'A', text: 'A Hole', isCorrect: true },
+        { key: 'B', text: 'Birthday Cake', isCorrect: false },
+        { key: 'C', text: 'A Secret', isCorrect: false }
+      ]
+    },
+    {
+      step: 3,
+      badge: 'Riddle #3 • The Final Key',
+      question: 'What has to be broken before you can use it, just like a birthday surprise?',
+      options: [
+        { key: 'A', text: 'A Promise', isCorrect: false },
+        { key: 'B', text: 'An Egg / Gift Seal', isCorrect: true },
+        { key: 'C', text: 'A Mirror', isCorrect: false }
+      ]
+    }
+  ];
+
+  let currentRiddleIndex = 0;
+  let isRiddleAnsweringLocked = false;
 
   // ==========================================================================
   // 2. DOM ELEMENT REFERENCES
@@ -124,6 +161,24 @@
   const balloonModalEmoji = document.getElementById('balloonModalEmoji');
   const balloonModalTitle = document.getElementById('balloonModalTitle');
   const balloonModalText = document.getElementById('balloonModalText');
+
+  // Riddle Quest & Mystery Gift Box DOM Elements
+  const riddleQuestCard = document.getElementById('riddleQuestCard');
+  const riddleActiveContainer = document.getElementById('riddleActiveContainer');
+  const riddleStepText = document.getElementById('riddleStepText');
+  const riddleProgressBar = document.getElementById('riddleProgressBar');
+  const riddleBadge = document.getElementById('riddleBadge');
+  const riddleQuestionText = document.getElementById('riddleQuestionText');
+  const riddleOptionsGrid = document.getElementById('riddleOptionsGrid');
+  const riddleFeedbackNotice = document.getElementById('riddleFeedbackNotice');
+  const mysteryGiftContainer = document.getElementById('mysteryGiftContainer');
+  const mysteryGiftBoxWrapper = document.getElementById('mysteryGiftBoxWrapper');
+  const openGiftBoxBtn = document.getElementById('openGiftBoxBtn');
+  const goldenVoucherContainer = document.getElementById('goldenVoucherContainer');
+  const revealedGiftWrap = document.getElementById('revealedGiftWrap');
+  const revealedGiftImg = document.getElementById('revealedGiftImg');
+  const voucherCelebrateBtn = document.getElementById('voucherCelebrateBtn');
+  const resetRiddlesBtn = document.getElementById('resetRiddlesBtn');
 
   // ==========================================================================
   // 3. MOBILE SCROLL & GHOST-CLICK GUARD
@@ -1207,7 +1262,223 @@
   }
 
   // ==========================================================================
-  // 16. INITIALIZATION ENTRYPOINT
+  // 16. 18th BIRTHDAY RIDDLE QUEST & MYSTERY GIFT BOX
+  // ==========================================================================
+  function renderCurrentRiddle() {
+    if (!riddleOptionsGrid || !riddleQuestionText) return;
+    const riddle = RIDDLES_DATA[currentRiddleIndex];
+    if (!riddle) return;
+
+    if (riddleStepText) {
+      riddleStepText.textContent = `Step ${currentRiddleIndex + 1} of ${RIDDLES_DATA.length}`;
+    }
+
+    if (riddleProgressBar) {
+      const pct = ((currentRiddleIndex + 1) / RIDDLES_DATA.length) * 100;
+      riddleProgressBar.style.width = `${pct}%`;
+    }
+
+    if (riddleBadge) {
+      riddleBadge.textContent = riddle.badge;
+    }
+
+    riddleQuestionText.textContent = `"${riddle.question}"`;
+
+    if (riddleFeedbackNotice) {
+      riddleFeedbackNotice.textContent = '';
+      riddleFeedbackNotice.style.opacity = '0';
+    }
+
+    riddleOptionsGrid.innerHTML = '';
+    riddle.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'riddle-option-btn';
+      btn.type = 'button';
+      btn.setAttribute('data-key', opt.key);
+      btn.setAttribute('data-index', idx);
+      btn.innerHTML = `<span class="riddle-option-key">${opt.key}</span><span class="riddle-option-text">${opt.text}</span>`;
+      btn.addEventListener('click', (e) => handleRiddleOptionClick(e, opt, btn));
+      riddleOptionsGrid.appendChild(btn);
+    });
+  }
+
+  function handleRiddleOptionClick(e, option, btn) {
+    if (e) e.stopPropagation();
+    // Guard against ghost clicks during scrolling / dragging
+    if (touchMovedDuringGesture || isRiddleAnsweringLocked) return;
+
+    if (option.isCorrect) {
+      isRiddleAnsweringLocked = true;
+      btn.classList.add('is-correct');
+      triggerHaptic([20, 30]);
+      playSparkleSound();
+      fireConfettiBurst(0.5, 0.6, 25);
+
+      if (riddleFeedbackNotice) {
+        riddleFeedbackNotice.textContent = '✨ Correct! Spot on, birthday girl! 🎉';
+        riddleFeedbackNotice.style.opacity = '1';
+      }
+
+      setTimeout(() => {
+        if (currentRiddleIndex < RIDDLES_DATA.length - 1) {
+          currentRiddleIndex++;
+          isRiddleAnsweringLocked = false;
+          renderCurrentRiddle();
+        } else {
+          isRiddleAnsweringLocked = false;
+          revealMysteryGiftBox();
+        }
+      }, 700);
+    } else {
+      btn.classList.add('is-wrong');
+      triggerHaptic([35, 40]);
+
+      if (riddleQuestCard) {
+        riddleQuestCard.classList.remove('is-shaking');
+        void riddleQuestCard.offsetWidth;
+        riddleQuestCard.classList.add('is-shaking');
+      }
+
+      const wrongMsg = 'Oops! Try again birthday girl 😉';
+      if (riddleFeedbackNotice) {
+        riddleFeedbackNotice.textContent = wrongMsg;
+        riddleFeedbackNotice.style.opacity = '1';
+      }
+      showToast(wrongMsg);
+
+      setTimeout(() => {
+        btn.classList.remove('is-wrong');
+      }, 600);
+    }
+  }
+
+  function revealMysteryGiftBox() {
+    if (riddleActiveContainer) riddleActiveContainer.style.display = 'none';
+    if (mysteryGiftContainer) {
+      mysteryGiftContainer.style.display = 'flex';
+    }
+
+    fireCelebrationFireworks();
+    playSparkleSound();
+    triggerHaptic([30, 50, 40]);
+    showToast('🎁 All 3 Riddles Solved! Mystery Gift Unlocked!');
+  }
+
+  function openMysteryGiftBox() {
+    if (mysteryGiftContainer) mysteryGiftContainer.style.display = 'none';
+    if (goldenVoucherContainer) {
+      goldenVoucherContainer.style.display = 'block';
+    }
+
+    // Keep gift photo hidden initially until user clicks "Claim My Surprise"
+    if (revealedGiftWrap) {
+      revealedGiftWrap.style.display = 'none';
+    }
+
+    fireCelebrationFireworks();
+    fireConfettiBurst(0.5, 0.45, 80);
+    playSparkleSound();
+    triggerHaptic([40, 80, 50, 100]);
+    showToast('✨ Secret Birthday Gift Voucher Unlocked! ✨');
+  }
+
+  function revealGiftPhoto() {
+    if (revealedGiftWrap) {
+      revealedGiftWrap.style.display = 'flex';
+      setTimeout(() => {
+        try {
+          revealedGiftWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (e) { /* ignore */ }
+      }, 100);
+    }
+
+    if (voucherCelebrateBtn) {
+      voucherCelebrateBtn.innerHTML = '<span>🎁 Gift Unveiled! 🎉</span>';
+      voucherCelebrateBtn.classList.add('is-unveiled');
+    }
+
+    fireCelebrationFireworks();
+    fireConfettiBurst(0.5, 0.5, 75);
+    playSparkleSound();
+    triggerHaptic([35, 50, 40]);
+    showToast('🎁 Happy 18th Birthday Shreya! Here is your surprise gift! ✨');
+  }
+
+  function resetRiddleQuest() {
+    currentRiddleIndex = 0;
+    isRiddleAnsweringLocked = false;
+    if (revealedGiftWrap) revealedGiftWrap.style.display = 'none';
+    if (voucherCelebrateBtn) {
+      voucherCelebrateBtn.innerHTML = '<span>🎊 Claim My Surprise!</span>';
+      voucherCelebrateBtn.classList.remove('is-unveiled');
+    }
+    if (goldenVoucherContainer) goldenVoucherContainer.style.display = 'none';
+    if (mysteryGiftContainer) mysteryGiftContainer.style.display = 'none';
+    if (riddleActiveContainer) riddleActiveContainer.style.display = 'block';
+    renderCurrentRiddle();
+    showToast('🔄 Riddle Quest Reset - Have fun!');
+  }
+
+  function setupRiddleQuest() {
+    if (!riddleQuestCard) return;
+
+    renderCurrentRiddle();
+
+    // Auto-fallback for gift image extension (tries .jpeg, .png, .webp if .jpg is not found)
+    if (revealedGiftImg) {
+      revealedGiftImg.addEventListener('error', () => {
+        const src = revealedGiftImg.getAttribute('src') || '';
+        if (src.endsWith('.jpg')) {
+          revealedGiftImg.src = 'gift.jpeg';
+        } else if (src.endsWith('.jpeg')) {
+          revealedGiftImg.src = 'gift.png';
+        } else if (src.endsWith('.png')) {
+          revealedGiftImg.src = 'gift.webp';
+        }
+      });
+    }
+
+    if (mysteryGiftBoxWrapper) {
+      mysteryGiftBoxWrapper.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        openMysteryGiftBox();
+      });
+      mysteryGiftBoxWrapper.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openMysteryGiftBox();
+        }
+      });
+    }
+
+    if (openGiftBoxBtn) {
+      openGiftBoxBtn.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        openMysteryGiftBox();
+      });
+    }
+
+    if (voucherCelebrateBtn) {
+      voucherCelebrateBtn.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        revealGiftPhoto();
+      });
+    }
+
+    if (resetRiddlesBtn) {
+      resetRiddlesBtn.addEventListener('click', (e) => {
+        if (touchMovedDuringGesture) return;
+        e.stopPropagation();
+        resetRiddleQuest();
+      });
+    }
+  }
+
+  // ==========================================================================
+  // 17. INITIALIZATION ENTRYPOINT
   // ==========================================================================
   function init() {
     // Initialize mobile scroll & ghost-click protection first
@@ -1258,6 +1529,7 @@
     setupShareActions();
     setupAmbientStars();
     setupModals();
+    setupRiddleQuest();
 
     if (isSiteUnlocked) {
       setTimeout(() => {

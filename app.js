@@ -18,7 +18,7 @@
   // 1. CONFIGURATION & STATE
   // ==========================================================================
   const BIRTH_DATE = new Date(2008, 10, 27, 0, 0, 0); // November 27, 2008
-  const UNLOCK_TARGET_DATE = new Date(2026, 10, 2, 0, 0, 0); // November 27, 2026, 12:00:00 AM
+  const UNLOCK_TARGET_DATE = new Date(2026, 10, 27, 0, 0, 0); // November 27, 2026, 12:00:00 AM
   let audioContext = null;
   let isPlaying = false; // Strict single source of truth for music playback
   let isSiteUnlocked = false;
